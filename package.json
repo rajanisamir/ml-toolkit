@@ -1,17 +1,34 @@
 {
+  "homepage": "https://rajanisamir.github.io/ml-toolkit",
   "name": "blog-beta",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.4",
+    "@mantine/core": "^5.6.3",
+    "@mantine/ds": "^5.6.3",
+    "@mantine/hooks": "^5.6.3",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.9",
+    "@tabler/icons": "^1.109.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "beautiful-react-diagrams": "^0.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.6.0",
+    "react-latex": "^2.0.0",
+    "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-scroll": "^1.8.8",
+    "reactflow": "^11.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -34,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }

@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import TransformerPage from "./pages/TransformerPage";
+import ComingSoonPage from "./pages/ComingSoonPage";
+import ScrollToTop from "./components/ScrollToTop";
+import Navbar from "./components/Navbar";
+import { AppShell } from "@mantine/core";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <div>
+        <AppShell
+          padding="md"
+          header={<Navbar />}
+          styles={(theme) => ({
+            main: {
+              backgroundColor:
+                theme.colorScheme === "dark"
+                  ? theme.colors.dark[8]
+                  : theme.colors.gray[0],
+            },
+          })}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <div className="content">
+            <ScrollToTop>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/transformer" element={<TransformerPage />} />
+                <Route path="/coming-soon" element={<ComingSoonPage />} />
+              </Routes>
+            </ScrollToTop>
+          </div>
+        </AppShell>
+      </div>
+    </Router>
   );
 }
 
