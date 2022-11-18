@@ -14,6 +14,8 @@ import { IconChevronDown } from "@tabler/icons";
 import { useNavigate } from "react-router-dom";
 import { UnstyledButton } from "@mantine/core";
 
+import logo from "../images/logo.png";
+
 const HEADER_HEIGHT = 70;
 
 const useStyles = createStyles((theme) => ({
@@ -126,9 +128,9 @@ export default function HeaderAction({ links }) {
           />
           <UnstyledButton>
             <Image
-              src="logo.png"
+              src={logo}
               alt="ML Toolkit Logo"
-              width={300}
+              width={200}
               onClick={() => navigate("/")}
             />
           </UnstyledButton>
