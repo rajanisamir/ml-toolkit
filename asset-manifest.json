@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/ml-toolkit/static/css/main.2bc5c773.css",
+    "main.js": "/ml-toolkit/static/js/main.152a6bde.js",
+    "static/js/787.a0e8c8df.chunk.js": "/ml-toolkit/static/js/787.a0e8c8df.chunk.js",
+    "static/media/QKVDiagram.svg": "/ml-toolkit/static/media/QKVDiagram.c765a1dc3fdfae94c3d7223bf73076d8.svg",
+    "index.html": "/ml-toolkit/index.html",
+    "main.2bc5c773.css.map": "/ml-toolkit/static/css/main.2bc5c773.css.map",
+    "main.152a6bde.js.map": "/ml-toolkit/static/js/main.152a6bde.js.map",
+    "787.a0e8c8df.chunk.js.map": "/ml-toolkit/static/js/787.a0e8c8df.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2bc5c773.css",
+    "static/js/main.152a6bde.js"
+  ]
+}
