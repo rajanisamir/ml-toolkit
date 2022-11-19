@@ -1,17 +1,19 @@
 {
   "files": {
-    "main.css": "/ml-toolkit/static/css/main.2bc5c773.css",
-    "main.js": "/ml-toolkit/static/js/main.1bab64bd.js",
+    "main.css": "/ml-toolkit/static/css/main.9d985698.css",
+    "main.js": "/ml-toolkit/static/js/main.41843681.js",
     "static/js/787.a0e8c8df.chunk.js": "/ml-toolkit/static/js/787.a0e8c8df.chunk.js",
-    "static/media/QKVDiagram.svg": "/ml-toolkit/static/media/QKVDiagram.c765a1dc3fdfae94c3d7223bf73076d8.svg",
+    "static/media/AttentionDiagram.svg": "/ml-toolkit/static/media/AttentionDiagram.c15ba31961a2b80ecc04fab531dbca20.svg",
+    "static/media/QKVDiagram.svg": "/ml-toolkit/static/media/QKVDiagram.8db4c6b0910f9fd4cc918edb68edc38f.svg",
     "static/media/logo.png": "/ml-toolkit/static/media/logo.3213c751e29746385e77.png",
+    "static/media/logo_dark.png": "/ml-toolkit/static/media/logo_dark.53501f70f735c638c299.png",
     "index.html": "/ml-toolkit/index.html",
-    "main.2bc5c773.css.map": "/ml-toolkit/static/css/main.2bc5c773.css.map",
-    "main.1bab64bd.js.map": "/ml-toolkit/static/js/main.1bab64bd.js.map",
+    "main.9d985698.css.map": "/ml-toolkit/static/css/main.9d985698.css.map",
+    "main.41843681.js.map": "/ml-toolkit/static/js/main.41843681.js.map",
     "787.a0e8c8df.chunk.js.map": "/ml-toolkit/static/js/787.a0e8c8df.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2bc5c773.css",
-    "static/js/main.1bab64bd.js"
+    "static/css/main.9d985698.css",
+    "static/js/main.41843681.js"
   ]
 }
