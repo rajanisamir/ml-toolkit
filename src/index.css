@@ -1,13 +1,6 @@
 body {
-  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-  font-family: Georgia, "Times New Roman", Times, serif;
-  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
   line-height: 1.6;
-  /* margin: 30px; */
-  /* padding-top: 60px; */
   font-size: 18px;
-  /* max-width: 100%;
-  overflow-x: hidden; */
 }
 
 .article-wrapper {
@@ -44,58 +37,67 @@ body {
   margin: auto;
 }
 
-/* .dark {
-  background-color: #333;
-  color: whitesmoke;
-}
-
-.light {
-  background-color: whitesmoke;
-  color: #333;
-} */
-
-/* .katex {
-  font-size: 1.5em;
-} */
-
-.bi.bi-diagram .bi-link-canvas-layer .bi-diagram-link .bi-link-path {
-  stroke: #67b9ee !important;
-  stroke-dasharray: 10, 2 !important;
-  animation: BiDashSegmentAnimation 1.7s linear infinite !important;
-}
-
-.bi-diagram-port {
-  background-color: transparent !important;
-}
-
-.bi {
-  cursor: default !important;
-  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
-  font-family: "Courier", monospace;
-  /* font-weight: bold; */
-  font-size: 15px;
-}
-
-.bi-link-path {
-  cursor: default !important;
-}
-
 .readonly-link {
   cursor: default !important;
 }
 
-.bi-diagram {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+/* Animations */
+
+.hidden {
+  opacity: 0;
 }
 
-.bi-diagram-node {
-  border: none !important;
-  display: flex !important;
+.fadeInText {
+  animation-duration: 1s;
+  animation-name: fadeInText;
 }
 
-.bi-port-wrapper {
-  position: absolute !important;
-  width: 100%;
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeFromLeft {
+  animation-duration: 1s;
+  animation-name: fadeFromLeft;
+}
+
+.fadeFromLeft1 {
+  animation-duration: 1s;
+  animation-name: fadeFromLeft;
+  animation-delay: 0.1s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+
+}
+
+.fadeFromLeft2 {
+  animation-duration: 1s;
+  animation-name: fadeFromLeft;
+  animation-delay: 0.2s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.fadeFromLeft3 {
+  animation-duration: 1s;
+  animation-name: fadeFromLeft;
+  animation-delay: 0.3s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeFromLeft {
+  0% {
+    transform: translate(-1rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
 }

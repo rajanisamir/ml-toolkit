@@ -13,10 +13,8 @@ import ArticleSubtitle from "../components/ArticleSubtitle";
 import ArticleAuthor from "../components/ArticleAuthor";
 import ArticleFeedback from "../components/ArticleFeedback";
 
-import AttentionDiagram from "../diagrams/AttentionDiagram";
-// import QKVDiagram from "../diagrams/QKVDiagram";
-
 import QKVDiagram from "../images/QKVDiagram.svg";
+import AttentionDiagram from "../images/AttentionDiagram.svg";
 
 const TransformerPage = () => {
   const contentRef = useRef(null);
@@ -286,8 +284,7 @@ const TransformerPage = () => {
               transformation. The "value" can be thought of as representing the
               impact of one word on another in translation.
             </p>
-            {/* <QKVDiagram /> */}
-            <Image src={QKVDiagram} width="95%" m="auto" pt="2rem" pb="2rem" />
+            <Image src={QKVDiagram} style={{margin: "4rem auto", width: "70%"}} />
             <p>
               One more observation we should interject here is that we don't
               really want to translate a sequence of English words{" "}
@@ -320,7 +317,7 @@ const TransformerPage = () => {
               "made" is associated with a future word "up," and thus refers to
               the act of fabrication.
             </p>
-            <AttentionDiagram />
+            <Image src={AttentionDiagram} style={{margin: "4rem auto", width: "100%"}} />
             <br />
             <ArticleHeader sectionHeader={sectionHeaders[3]} />
             <p>

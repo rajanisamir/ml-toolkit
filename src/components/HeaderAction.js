@@ -5,16 +5,16 @@ import {
   Header,
   Container,
   Group,
-  Button,
-  Burger,
-  Image,
+  Image,  
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons";
-import { useNavigate } from "react-router-dom";
-import { UnstyledButton } from "@mantine/core";
+import { useNavigate, NavLink } from "react-router-dom";
+import { UnstyledButton, useMantineColorScheme } from "@mantine/core";
 
 import logo from "../images/logo.png";
+import logo_dark from "../images/logo_dark.png";
+
+import ThemeButton from "../components/ThemeButton";
 
 const HEADER_HEIGHT = 70;
 
@@ -74,7 +74,7 @@ const useStyles = createStyles((theme) => ({
 
 export default function HeaderAction({ links }) {
   const { classes } = useStyles();
-  const [opened, { toggle }] = useDisclosure(false);
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   const navigate = useNavigate();
   const items = links.map((link) => {
@@ -88,16 +88,15 @@ export default function HeaderAction({ links }) {
       return (
         <Menu key={link.label} trigger="hover" exitTransitionDuration={0}>
           <Menu.Target>
-            <a
-              href={link.link}
+            <NavLink
+              to={link.link}
               className={classes.link}
-              onClick={(event) => event.preventDefault()}
             >
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
                 <IconChevronDown size={12} stroke={1.5} />
               </Center>
-            </a>
+            </NavLink>
           </Menu.Target>
           <Menu.Dropdown>{menuItems}</Menu.Dropdown>
         </Menu>
@@ -105,46 +104,37 @@ export default function HeaderAction({ links }) {
     }
 
     return (
-      <a
-        key={link.label}
-        href={link.link}
+      <NavLink
         className={classes.link}
-        onClick={(event) => event.preventDefault()}
+        to={link.link}
       >
         {link.label}
-      </a>
+      </NavLink>
     );
   });
 
   return (
     <Header height={HEADER_HEIGHT} sx={{ borderBottom: 0, position: "sticky" }}>
       <Container className={classes.inner} fluid>
-        <Group>
-          <Burger
-            opened={opened}
-            onClick={toggle}
-            className={classes.burger}
-            size="sm"
+        <UnstyledButton>
+          <Image
+            src={colorScheme === 'dark' ? logo_dark : logo}
+            alt="ML Toolkit Logo"
+            width={200}
+            onClick={() => {navigate("/") }}
           />
-          <UnstyledButton>
-            <Image
-              src={logo}
-              alt="ML Toolkit Logo"
-              width={200}
-              onClick={() => navigate("/")}
-            />
-          </UnstyledButton>
-        </Group>
+        </UnstyledButton>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
-        <Button
+        {/* <Button
           radius="xl"
           sx={{ height: 30 }}
           onClick={() => navigate("/about")}
         >
           About This Project
-        </Button>
+        </Button> */}
+        <ThemeButton />
       </Container>
     </Header>
   );

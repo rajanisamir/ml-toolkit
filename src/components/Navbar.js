@@ -35,6 +35,10 @@ const NavBar = () => {
             { link: "/coming-soon", label: "Backpropagation" },
           ],
         },
+        {
+          label: "About",
+          link: "/about"
+        }
       ]}
     />
   );

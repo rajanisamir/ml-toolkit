@@ -1,32 +1,19 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { ActionIcon, useMantineColorScheme } from '@mantine/core';
+import { IconSun, IconMoonStars } from '@tabler/icons';
 
-const ThemeButton = ({ defaultState = "light" }) => {
-  const [theme, setTheme] = useState(defaultState);
+const ThemeButton = () => {
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === 'dark';
 
-  useEffect(() => {
-    document.body.classList.add(defaultState);
-  });
-
-  const applyLightTheme = () => {
-    document.body.classList.remove("dark");
-    document.body.classList.add("light");
-    setTheme("light");
-  };
-
-  const applyDarkTheme = () => {
-    document.body.classList.remove("light");
-    document.body.classList.add("dark");
-    setTheme("dark");
-  };
-
-  return theme === "light" ? (
-    <DarkModeIcon onClick={applyDarkTheme} className="theme-button" />
-  ) : (
-    <LightModeIcon onClick={applyLightTheme} className="theme-button" />
+  return (
+    <ActionIcon
+      color="blue"
+      onClick={() => toggleColorScheme()}
+      title="Toggle color scheme"
+    >
+      {dark ? <IconSun size={18} /> : <IconMoonStars size={18} />}
+    </ActionIcon>
   );
-};
+}
 
 export default ThemeButton;
