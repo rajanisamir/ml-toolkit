@@ -8,7 +8,7 @@ const NavBar = () => {
         {
           label: "Model Architectures",
           links: [
-            { link: "/transformer", label: "Transformer" },
+            { link: "/transformer1", label: "Transformer" },
             {
               link: "/coming-soon",
               label: "Convolutional Neural Network (CNN)",

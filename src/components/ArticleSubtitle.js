@@ -1,14 +1,14 @@
 import { Text } from "@mantine/core";
 
-const ArticleSubtitle = ({ title }) => {
+const ArticleSubtitle = ({ name }) => {
   return (
     <Text
       variant="gradient"
       gradient={{ from: "gray.6", to: "gray.8", deg: 45 }}
       weight={700}
-      style={{ fontSize: 20 }}
+      style={{ fontSize: 20, marginBottom: "2rem" }}
     >
-      {title}
+      {name}
     </Text>
   );
 };

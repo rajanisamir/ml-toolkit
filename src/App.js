@@ -1,15 +1,18 @@
 
 import { useState } from 'react';
 
-import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import TransformerPage from "./pages/TransformerPage";
-import ComingSoonPage from "./pages/ComingSoonPage";
-import ScrollToTop from "./components/ScrollToTop";
-import Navbar from "./components/Navbar";
-import { AppShell, MantineProvider, ColorSchemeProvider } from "@mantine/core";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import { AppShell, MantineProvider, ColorSchemeProvider } from "@mantine/core";
+
+import ScrollToTop from "./components/ScrollToTop";
+import Navbar from "./components/Navbar";
+
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import TransformerPage1 from "./pages/TransformerPage1";
+import TransformerPage2 from "./pages/TransformerPage2";
+import ComingSoonPage from "./pages/ComingSoonPage";
 
 function App() {
   const [colorScheme, setColorScheme] = useState('dark');
@@ -50,7 +53,8 @@ function App() {
                   <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about" element={<AboutPage />} />
-                    <Route path="/transformer" element={<TransformerPage />} />
+                    <Route path="/transformer1" element={<TransformerPage1 />} />
+                    <Route path="/transformer2" element={<TransformerPage2 />} />
                     <Route path="/coming-soon" element={<ComingSoonPage />} />
                   </Routes>
                 </ScrollToTop>

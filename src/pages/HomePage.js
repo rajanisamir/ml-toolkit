@@ -5,6 +5,7 @@ import { Text, Grid } from "@mantine/core";
 import ArticleCard from "../components/ArticleCard";
 
 import QKVDiagram from "../images/QKVDiagram.svg";
+import EncoderDiagram from "../images/EncoderDiagram.svg";
 
 const HomePage = () => {
   const { ref: section1, inView: section1InView } = useInView();
@@ -27,7 +28,8 @@ const HomePage = () => {
       // description="Already familiar with concepts in deep learning? This article provides an in-depth look into the Transformer, an attention-driven sequence transduction model. Arguably the most important deep learning architecture right now, this architecture has yielded state-of-the-art machine translation performance and drives models like GPT-3."
       description="How does scaled dot-product attention accomodate long-range dependencies in sequences?"
       img={QKVDiagram}
-      pagePath="/transformer"
+      fit="cover"
+      pagePath="/transformer1"
     />
   );
 
@@ -37,8 +39,8 @@ const HomePage = () => {
       // description="Already familiar with concepts in deep learning? This article provides an in-depth look into the Transformer, an attention-driven sequence transduction model. Arguably the most important deep learning architecture right now, this architecture has yielded state-of-the-art machine translation performance and drives models like GPT-3."
       description="We provide a treatment of multi-headed attention and positional encoding to finish describing the encoder of the Transformer."
       inDevelopment="true"
-      img={QKVDiagram}
-      pagePath="/transformer"
+      img={EncoderDiagram}
+      pagePath="/transformer2"
     />
   );
 
@@ -102,9 +104,9 @@ const HomePage = () => {
         </Text>
         <br />
         <Grid>
-          <Grid.Col span={4} className={section1InView ? "fadeFromLeft1" : "hidden"}>{backpropagationCard}</Grid.Col>
-          <Grid.Col span={4} className={section1InView ? "fadeFromLeft2" : "hidden"}>{backpropagationCard}</Grid.Col>
-          <Grid.Col span={4} className={section1InView ? "fadeFromLeft3" : "hidden"}>{backpropagationCard}</Grid.Col>
+          <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay1" : "hidden"}>{backpropagationCard}</Grid.Col>
+          <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay2" : "hidden"}>{backpropagationCard}</Grid.Col>
+          <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay3" : "hidden"}>{backpropagationCard}</Grid.Col>
         </Grid>
       </div>
       <br />
@@ -123,9 +125,9 @@ const HomePage = () => {
         </Text>
         <br />
         <Grid>
-          <Grid.Col span={4} className={section2InView ? "fadeFromLeft1" : "hidden"}>{transformerCard1}</Grid.Col>
-          <Grid.Col span={4} className={section2InView ? "fadeFromLeft2" : "hidden"}>{transformerCard2}</Grid.Col>
-          <Grid.Col span={4} className={section2InView ? "fadeFromLeft3" : "hidden"}>{transformerCard3}</Grid.Col>
+          <Grid.Col span={4} className={section2InView ? "fadeFromLeft delay1" : "hidden"}>{transformerCard1}</Grid.Col>
+          <Grid.Col span={4} className={section2InView ? "fadeFromLeft delay2" : "hidden"}>{transformerCard2}</Grid.Col>
+          <Grid.Col span={4} className={section2InView ? "fadeFromLeft delay3" : "hidden"}>{transformerCard3}</Grid.Col>
         </Grid>
       </div>
     </div>

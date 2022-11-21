@@ -1,9 +1,9 @@
 import { Text } from "@mantine/core";
 
-const ArticleTitle = ({ title }) => {
+const ArticleTitle = ({ name }) => {
   return (
     <Text variant="gradient" weight={700} style={{ fontSize: 45 }}>
-      {title}
+      {name}
     </Text>
   );
 };

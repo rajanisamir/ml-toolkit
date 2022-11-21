@@ -48,7 +48,7 @@ body {
 }
 
 .fadeInText {
-  animation-duration: 1s;
+  animation-duration: 1.5s;
   animation-name: fadeInText;
 }
 
@@ -64,31 +64,20 @@ body {
 .fadeFromLeft {
   animation-duration: 1s;
   animation-name: fadeFromLeft;
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
 
-.fadeFromLeft1 {
-  animation-duration: 1s;
-  animation-name: fadeFromLeft;
+.delay1 {
   animation-delay: 0.1s;
-  opacity: 0;
-  animation-fill-mode: forwards;
-
 }
 
-.fadeFromLeft2 {
-  animation-duration: 1s;
-  animation-name: fadeFromLeft;
+.delay2 {
   animation-delay: 0.2s;
-  opacity: 0;
-  animation-fill-mode: forwards;
 }
 
-.fadeFromLeft3 {
-  animation-duration: 1s;
-  animation-name: fadeFromLeft;
+.delay3 {
   animation-delay: 0.3s;
-  opacity: 0;
-  animation-fill-mode: forwards;
 }
 
 @keyframes fadeFromLeft {

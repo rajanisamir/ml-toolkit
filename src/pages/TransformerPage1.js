@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 
-import { Anchor, Blockquote, Image } from "@mantine/core";
+import { Anchor, Blockquote } from "@mantine/core";
 
 import Eq from "../components/Eq";
 import BlockEq from "../components/BlockEq";
@@ -12,11 +12,12 @@ import ArticleTitle from "../components/ArticleTitle";
 import ArticleSubtitle from "../components/ArticleSubtitle";
 import ArticleAuthor from "../components/ArticleAuthor";
 import ArticleFeedback from "../components/ArticleFeedback";
+import ArticleImage from "../components/ArticleImage";
 
 import QKVDiagram from "../images/QKVDiagram.svg";
 import AttentionDiagram from "../images/AttentionDiagram.svg";
 
-const TransformerPage = () => {
+const TransformerPage1 = () => {
   const contentRef = useRef(null);
 
   const sectionHeaders = [
@@ -51,11 +52,9 @@ const TransformerPage = () => {
         />
         <div className="article-content-wrapper">
           <div className="article-content" ref={contentRef}>
-            <ArticleTitle title={"The Transformer"} />
-            <ArticleSubtitle title={"Part 1: Paying Attention"} />
-            <br />
+            <ArticleTitle name={"The Transformer"} />
+            <ArticleSubtitle name={"Part 1: Paying Attention"}/> 
             <ArticleAuthor />
-            <br />
             <ArticleHeader sectionHeader={sectionHeaders[0]} />
             <p>
               Because this article will be the first one published on this
@@ -77,8 +76,6 @@ const TransformerPage = () => {
               the content as needed.
             </p>
             <ArticleFeedback />
-            <br />
-            <br />
             <ArticleHeader sectionHeader={sectionHeaders[1]} />
             <p>
               The Transformer is a neural network architecture that was first
@@ -151,7 +148,6 @@ const TransformerPage = () => {
               fruitfully <em>pay attention</em> to other words during a
               translation task.
             </p>
-            <br />
             <ArticleHeader sectionHeader={sectionHeaders[2]} />
             <p>
               Before we get into the details of developing a model that
@@ -284,7 +280,7 @@ const TransformerPage = () => {
               transformation. The "value" can be thought of as representing the
               impact of one word on another in translation.
             </p>
-            <Image src={QKVDiagram} style={{margin: "4rem auto", width: "70%"}} />
+            <ArticleImage src={QKVDiagram} width="70%" />
             <p>
               One more observation we should interject here is that we don't
               really want to translate a sequence of English words{" "}
@@ -317,8 +313,7 @@ const TransformerPage = () => {
               "made" is associated with a future word "up," and thus refers to
               the act of fabrication.
             </p>
-            <Image src={AttentionDiagram} style={{margin: "4rem auto", width: "100%"}} />
-            <br />
+            <ArticleImage src={AttentionDiagram} />
             <ArticleHeader sectionHeader={sectionHeaders[3]} />
             <p>
               Now that we have the basics of the attention mechanism nailed
@@ -335,7 +330,6 @@ const TransformerPage = () => {
               <Eq text={"$K$"} /> by packing each word's key together into a
               single matrix. Then, for our seven-token input sentence:
             </p>
-            <br />
             <BlockEq
               text="$$
                 Q = \begin{bmatrix} 
@@ -354,7 +348,6 @@ const TransformerPage = () => {
               $$"
               displayMode={true}
             />
-            <br />
             <BlockEq
               text="$$
                 K = \begin{bmatrix} 
@@ -574,4 +567,4 @@ const TransformerPage = () => {
   );
 };
 
-export default TransformerPage;
+export default TransformerPage1;
