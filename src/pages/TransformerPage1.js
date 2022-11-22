@@ -171,7 +171,7 @@ const TransformerPage1 = () => {
               parameterized. For now, let's assume that the model associates
               with each word, a d<sub>model</sub>
               -dimensional vector. For concreteness, let's keep the value d
-              <sub>model</sub>=64 in mind for now. Moreover, the mapping from
+              <sub>model</sub>=512 in mind for now. Moreover, the mapping from
               words to embeddings must support tokens which correspond to
               punctuation, as well as an end-of-sentence token, which by
               convention is abbreviated as &lt;EOS&gt;. Such a token is
@@ -184,8 +184,8 @@ const TransformerPage1 = () => {
             <BlockEq
               text="$$
                 \begin{aligned}
-                  I &\to [0.32, 1.53, \dots, 0.96] \text{ (a 64-dimensional vector)}\\
-                  made &\to [0.52, 2.01, \dots, 7.64]\\
+                  I &\to [0.32, 1.53, \dots, 0.96] \text{ (a 512-dimensional vector)}\\
+                  made &\to [0.52, 2.01, \dots, 7.512]\\
                   up &\to [4.40, 8.57, \dots, 0.23]\\
                   a &\to [1.49, 2.34, \dots, 0.05]\\
                   story &\to [1.20, 8.33, \dots, 3.15]\\
@@ -333,17 +333,17 @@ const TransformerPage1 = () => {
             <BlockEq
               text="$$
                 Q = \begin{bmatrix} 
-                  Q_{1,1} & Q_{1,2} & \cdots & Q_{1, 64} \\
-                  Q_{2,1} & Q_{2,2} & \cdots & Q_{2, 64} \\
+                  Q_{1,1} & Q_{1,2} & \cdots & Q_{1, 512} \\
+                  Q_{2,1} & Q_{2,2} & \cdots & Q_{2, 512} \\
                   \vdots  & \vdots  & \ddots & \vdots     \\
-                  Q_{7,1} & Q_{7,2} & \cdots & Q_{7, 64} \\
+                  Q_{7,1} & Q_{7,2} & \cdots & Q_{7, 512} \\
                 \end{bmatrix}
 
                 \begin{matrix}
-                  &\text{Query (I)}, &d = 64\\
-                  &\text{Query (Made)}, &d = 64\\
+                  &\text{Query (I)}, &d = 512\\
+                  &\text{Query (Made)}, &d = 512\\
                   &\vdots\\
-                  &\text{Query (<EOS>)}, &d = 64\\
+                  &\text{Query (<EOS>)}, &d = 512\\
                 \end{matrix}
               $$"
               displayMode={true}
@@ -351,17 +351,17 @@ const TransformerPage1 = () => {
             <BlockEq
               text="$$
                 K = \begin{bmatrix} 
-                  K_{1,1} & K_{1,2} & \cdots & K_{1, 64} \\
-                  K_{2,1} & K_{2,2} & \cdots & K_{2, 64} \\
+                  K_{1,1} & K_{1,2} & \cdots & K_{1, 512} \\
+                  K_{2,1} & K_{2,2} & \cdots & K_{2, 512} \\
                   \vdots  & \vdots  & \ddots & \vdots     \\
-                  K_{7,1} & K_{7,2} & \vdots & K_{7, 64} \\
+                  K_{7,1} & K_{7,2} & \vdots & K_{7, 512} \\
                 \end{bmatrix}
 
                 \begin{matrix}
-                  &\text{Key (I)}, &d = 64\\
-                  &\text{Key (Made)}, &d = 64\\
+                  &\text{Key (I)}, &d = 512\\
+                  &\text{Key (Made)}, &d = 512\\
                   &\vdots\\
-                  &\text{Key (<EOS>)}, &d = 64\\
+                  &\text{Key (<EOS>)}, &d = 512\\
                 \end{matrix}
               $$"
               displayMode={true}
@@ -444,17 +444,17 @@ const TransformerPage1 = () => {
             <BlockEq
               text="$$
                 V = \begin{bmatrix} 
-                  V_{1,1} & V_{1,2} & \cdots & V_{1, 64} \\
-                  V_{2,1} & V_{2,2} & \cdots & V_{2, 64} \\
+                  V_{1,1} & V_{1,2} & \cdots & V_{1, 512} \\
+                  V_{2,1} & V_{2,2} & \cdots & V_{2, 512} \\
                   \vdots  & \vdots  & \ddots & \vdots     \\
-                  V_{7,1} & V_{7,2} & \vdots & V_{7, 64} \\
+                  V_{7,1} & V_{7,2} & \vdots & V_{7, 512} \\
                 \end{bmatrix}
 
                 \begin{matrix}
-                  &\text{Value (I)}, &d = 64\\
-                  &\text{Value (Made)}, &d = 64\\
+                  &\text{Value (I)}, &d = 512\\
+                  &\text{Value (Made)}, &d = 512\\
                   &\vdots\\
-                  &\text{Value (<EOS>)}, &d = 64\\
+                  &\text{Value (<EOS>)}, &d = 512\\
                 \end{matrix}
               $$"
               displayMode={true}
@@ -513,7 +513,7 @@ const TransformerPage1 = () => {
                   Second, the paper divides the attention scores by{" "}
                   <Eq text={"$\\sqrt{d_k}$"} /> before applying the softmax
                   function, where <Eq text={"$d_k$"} /> refers to the dimension
-                  of the keys, which in our example is 64. You probably
+                  of the keys, which in our example is 512. You probably
                   shouldn't worry too much about this term: in fact, the paper's
                   tone suggests that they were quite uncertain about its effect,
                   even though they found it improved the performance. I'll just
