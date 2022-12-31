@@ -6,7 +6,7 @@ const ArticleSubtitle = ({ name }) => {
       variant="gradient"
       gradient={{ from: "gray.6", to: "gray.8", deg: 45 }}
       weight={700}
-      style={{ fontSize: 20, marginBottom: "2rem" }}
+      style={{ fontSize: 28, marginBottom: "2rem" }}
     >
       {name}
     </Text>

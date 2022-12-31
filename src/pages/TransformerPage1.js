@@ -17,6 +17,8 @@ import ArticleImage from "../components/ArticleImage";
 import QKVDiagram from "../images/QKVDiagram.svg";
 import AttentionDiagram from "../images/AttentionDiagram.svg";
 
+import Translation from "../images/Translation.svg"
+
 const TransformerPage1 = () => {
   const contentRef = useRef(null);
 
@@ -79,8 +81,8 @@ const TransformerPage1 = () => {
             <ArticleHeader sectionHeader={sectionHeaders[1]} />
             <p>
               The Transformer is a neural network architecture that was first
-              introduced in 2017 by Vaswani et al. in the paper{" "}
-              <em>Attention is All You Need</em>. Since its introduction, the
+              introduced in 2017 by Vaswani et al. in the paper
+              "Attention is All You Need." Since its introduction, the
               model has spurred on major advancements in domains such as natural
               langauge processing and computer vision; thus, understanding not
               only its use cases, but also how it works under the hood, is
@@ -93,23 +95,27 @@ const TransformerPage1 = () => {
               historia"). Despite how naturally language comes to humans, it's
               no secret that such a task is non-trivial for a machine; if you've
               taken a course in a foreign language, you've likely joked about
-              how useless Google Translate could often be. In this post, I'll
+              how useless Google Translate could often be (though nowadays it's quite good). In this post, I'll
               try to demystify the Transformer by trying to convince you that,
               as a machine learning researcher with enough time and patience,
               you might have come up with a similar idea yourself. Let's begin
               by dissecting our toy example to better understand why this task
               can quickly become quite complicated.
             </p>
+            <ArticleImage src={Translation} width="85%"/>
             <p>
               A naive language translation program might attempt to translate
               our sentence, "I made up a story," word-by-word. Our program might
-              begin by translating the word "I" to "yo." If you've taken an
-              introductory Spanish course, you probably know the inclusion of
-              the pronoun "yo" is usually superfluous, because the conjugation
-              of the verb that follows would reveal that the sentence is in
-              first-person (if you have no knowledge of Spanish, don't worry
-              about this). Certainly, however, what our program has done isn't
-              incorrect. So far, so good. The next word, "made," the conjugated
+              begin by translating the word "I" to "yo."
+
+                  If you've taken an
+                  introductory Spanish course, you probably know the inclusion of
+                  the pronoun "yo" can sometimes be  superfluous, because the conjugation
+                  of the verb that follows would reveal that the sentence is in
+                  first-person. Certainly, however, what our program has done isn't
+                  incorrect. 
+
+               So far, so good. The next word, "made," the conjugated
               form of the verb "to make," poses issues, though. The first issue
               you might notice is that the verb "to make" in English is
               typically translated to "hacer" is Spanish. Our example, however,

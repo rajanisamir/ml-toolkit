@@ -11,16 +11,16 @@ const HomePage = () => {
   const { ref: section1, inView: section1InView } = useInView();
   const { ref: section2, inView: section2InView } = useInView();
 
-  const backpropagationCard = (
-    <ArticleCard
-      name="Backpropagation"
-      // description="This is an excellent place to start if you're new to machine learning; backpropagation is at the foundation of all deep learning architectures. This article will delve into the theory behind why backpropagation allows a neural network to learn, and we'll nail in the concept with a practical example of digit recognition using PyTorch."
-      description="How do networks update their weights to improve predictions?"
-      comingSoon="true"
-      img={QKVDiagram}
-      pagePath="/coming-soon"
-    />
-  );
+  // const backpropagationCard = (
+  //   <ArticleCard
+  //     name="Backpropagation"
+  //     // description="This is an excellent place to start if you're new to machine learning; backpropagation is at the foundation of all deep learning architectures. This article will delve into the theory behind why backpropagation allows a neural network to learn, and we'll nail in the concept with a practical example of digit recognition using PyTorch."
+  //     description="How do networks update their weights to improve predictions?"
+  //     comingSoon="true"
+  //     img={QKVDiagram}
+  //     pagePath="/coming-soon"
+  //   />
+  // );
 
   const transformerCard1 = (
     <ArticleCard
@@ -38,7 +38,6 @@ const HomePage = () => {
       name="The Transformer, Part 2"
       // description="Already familiar with concepts in deep learning? This article provides an in-depth look into the Transformer, an attention-driven sequence transduction model. Arguably the most important deep learning architecture right now, this architecture has yielded state-of-the-art machine translation performance and drives models like GPT-3."
       description="We provide a treatment of multi-headed attention and positional encoding to finish describing the encoder of the Transformer."
-      inDevelopment="true"
       img={EncoderDiagram}
       pagePath="/transformer2"
     />
@@ -56,7 +55,7 @@ const HomePage = () => {
   );
 
   return (
-    <div style={{ marginLeft: "15%", marginRight: "15%" }}>
+    <div style={{ marginLeft: "25%", marginRight: "25%" }}>
       <Text
         component="span"
         weight={700}
@@ -76,7 +75,7 @@ const HomePage = () => {
       </Text>
       <br />
       <br />
-      <Text size="xl">
+      <Text size="lg">
         Building machine learning tools shouldn't be difficult. ML Toolkit is a free
         educational resource that eschews both the technical language of
         research papers and the inconsistent explanations of most learning
@@ -103,11 +102,11 @@ const HomePage = () => {
           neural networks.
         </Text>
         <br />
-        <Grid>
+        {/* <Grid>
           <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay1" : "hidden"}>{backpropagationCard}</Grid.Col>
           <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay2" : "hidden"}>{backpropagationCard}</Grid.Col>
           <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay3" : "hidden"}>{backpropagationCard}</Grid.Col>
-        </Grid>
+        </Grid> */}
       </div>
       <br />
       <br />

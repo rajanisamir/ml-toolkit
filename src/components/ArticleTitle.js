@@ -2,7 +2,7 @@ import { Text } from "@mantine/core";
 
 const ArticleTitle = ({ name }) => {
   return (
-    <Text variant="gradient" weight={700} style={{ fontSize: 45 }}>
+    <Text variant="gradient" weight={700} style={{ fontSize: 55 }}>
       {name}
     </Text>
   );

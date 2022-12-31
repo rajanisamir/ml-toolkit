@@ -15,7 +15,7 @@ import TransformerPage2 from "./pages/TransformerPage2";
 import ComingSoonPage from "./pages/ComingSoonPage";
 
 function App() {
-  const [colorScheme, setColorScheme] = useState('dark');
+  const [colorScheme, setColorScheme] = useState('light');
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
@@ -26,6 +26,13 @@ function App() {
         withNormalizeCSS
         theme={{
           primaryColor: "indigo",
+          fontSizes: {
+            xs: 12,
+            sm: 14,
+            md: 18,
+            lg: 24,
+            xl: 28,
+          },
           defaultGradient: {
             from: "cyan",
             to: "indigo",
