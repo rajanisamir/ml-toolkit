@@ -5,7 +5,7 @@ import {
   Header,
   Container,
   Group,
-  Image,  
+  Image,
 } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons";
 import { useNavigate, NavLink } from "react-router-dom";
@@ -88,10 +88,7 @@ export default function HeaderAction({ links }) {
       return (
         <Menu key={link.label} trigger="hover" exitTransitionDuration={0}>
           <Menu.Target>
-            <NavLink
-              to={link.link}
-              className={classes.link}
-            >
+            <NavLink to={link.link} className={classes.link}>
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
                 <IconChevronDown size={12} stroke={1.5} />
@@ -104,10 +101,7 @@ export default function HeaderAction({ links }) {
     }
 
     return (
-      <NavLink
-        className={classes.link}
-        to={link.link}
-      >
+      <NavLink className={classes.link} to={link.link}>
         {link.label}
       </NavLink>
     );
@@ -118,10 +112,12 @@ export default function HeaderAction({ links }) {
       <Container className={classes.inner} fluid>
         <UnstyledButton>
           <Image
-            src={colorScheme === 'dark' ? logo_dark : logo}
+            src={colorScheme === "dark" ? logo_dark : logo}
             alt="ML Toolkit Logo"
             width={200}
-            onClick={() => {navigate("/") }}
+            onClick={() => {
+              navigate("/");
+            }}
           />
         </UnstyledButton>
         <Group spacing={5} className={classes.links}>

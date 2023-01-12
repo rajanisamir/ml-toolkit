@@ -6,10 +6,12 @@ import ArticleCard from "../components/ArticleCard";
 
 import QKVDiagram from "../images/QKVDiagram.svg";
 import EncoderDiagram from "../images/EncoderDiagram.svg";
+import DropoutDiagram from "../images/DropoutDiagram.svg";
 
 const HomePage = () => {
   const { ref: section1, inView: section1InView } = useInView();
   const { ref: section2, inView: section2InView } = useInView();
+  const { ref: section3, inView: section3InView } = useInView();
 
   // const backpropagationCard = (
   //   <ArticleCard
@@ -21,6 +23,15 @@ const HomePage = () => {
   //     pagePath="/coming-soon"
   //   />
   // );
+
+  const dropoutCard = (
+    <ArticleCard
+      name="Dropout"
+      description="Learn about how dropout layers help prevent overfitting in neural networks, and work through an experiment in PyTorch."
+      img={DropoutDiagram}
+      pagePath="/dropout"
+    />
+  );
 
   const transformerCard1 = (
     <ArticleCard
@@ -48,14 +59,14 @@ const HomePage = () => {
       name="The Transformer, Part 3"
       // description="Already familiar with concepts in deep learning? This article provides an in-depth look into the Transformer, an attention-driven sequence transduction model. Arguably the most important deep learning architecture right now, this architecture has yielded state-of-the-art machine translation performance and drives models like GPT-3."
       description="We describe the architecture of the Transformer's decoder and finalize the details of the the model."
-      comingSoon="true"
+      inDevelopment="true"
       img={QKVDiagram}
-      pagePath="/transformer"
+      pagePath="/transformer3"
     />
   );
 
   return (
-    <div style={{ marginLeft: "25%", marginRight: "25%" }}>
+    <div style={{ marginLeft: "20%", marginRight: "20%" }}>
       <Text
         component="span"
         weight={700}
@@ -75,31 +86,81 @@ const HomePage = () => {
       </Text>
       <br />
       <br />
-      <Text size="lg">
-        Building machine learning tools shouldn't be difficult. ML Toolkit is a free
-        educational resource that eschews both the technical language of
-        research papers and the inconsistent explanations of most learning
-        resources to provide a no-compromises means of understanding complex but
-        powerful concepts.
+      <Text style={{ fontSize: 21 }}>
+        Building machine learning applications shouldn't be complicated. ML
+        Toolkit is an educational resource that eschews both the information
+        density of technical research papers and the inconsistent explanations
+        of many learning resources to provide a no-compromises means of
+        understanding complex but powerful concepts.
       </Text>
       <br />
       <br />
       <br />
-      {/* <Text style={{ fontSize: 40 }} weight={700} mb="1rem">
-        Start Learning Now
-      </Text> */}
       <br />
       <div ref={section1}>
-        <Text style={{ fontSize: 30 }} weight={600} mb="1rem" className={section1InView ? "fadeInText" : "hidden"}>
+        <Text
+          style={{ fontSize: 30 }}
+          weight={600}
+          mb="1rem"
+          className={section1InView ? "fadeInText" : "hidden"}
+        >
+          Deep Learning Techniques
+        </Text>
+        <Text mb="1rem" className={section1InView ? "fadeFromLeft" : "hidden"}>
+          What do deep learning researchers mean by "regularization"? Should you
+          be adding dropout layers to your neural network? What is the
+          difference between batch normalization and layer normalization? Why
+          have residual connections become so prevalent? We'll take a deep dive
+          into several techniques used in constructing and training neural
+          networks, with hands-on experiments in PyTorch.
+        </Text>
+        <br />
+        <Grid>
+          <Grid.Col
+            span={4}
+            className={section1InView ? "fadeFromLeft delay1" : "hidden"}
+          >
+            {dropoutCard}
+          </Grid.Col>
+          {/* <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay2" : "hidden"}>{backpropagationCard}</Grid.Col>
+          <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay3" : "hidden"}>{backpropagationCard}</Grid.Col> */}
+        </Grid>
+      </div>
+      <br />
+      <br />
+      <br />
+      <div ref={section2}>
+        {/* <Text
+          style={{ fontSize: 30 }}
+          weight={600}
+          mb="1rem"
+          className={section1InView ? "fadeInText" : "hidden"}
+        >
           Introduction to Deep Learning
         </Text>
         <Text mb="1rem" className={section1InView ? "fadeFromLeft" : "hidden"}>
           New to deep learning? This series will take you through fundamental
-          concepts such as feedforward neural networks, activation functions, and
-          backpropagation. You'll come out with an intuitive understanding of how
-          a neural network can be trained to solve complex tasks and will be
-          well-equipped to move onto more advanced concepts like convolutional
-          neural networks.
+          concepts such as feedforward neural networks, activation functions,
+          and backpropagation. You'll come out with an intuitive understanding
+          of how a neural network can be trained to solve complex tasks and will
+          be well-equipped to move onto more advanced concepts like
+          convolutional neural networks.
+        </Text> */}
+        <Text
+          style={{ fontSize: 30 }}
+          weight={600}
+          mb="1rem"
+          className={section2InView ? "fadeInText" : "hidden"}
+        >
+          Convolutional Neural Networks
+        </Text>
+        <Text mb="1rem" className={section2InView ? "fadeFromLeft" : "hidden"}>
+          Why have convolutional neural networks become so prevalent in image
+          recognition? This series will explain the theory behind what makes
+          CNNs well-suited to image-based tasks, walk you through practice
+          problems to reinforce your understanding, and provide a hands-on
+          implementation exercise in PyTorch to compare the performance of CNNs
+          with MLPs on a simple optical character recognition task.
         </Text>
         <br />
         {/* <Grid>
@@ -111,22 +172,43 @@ const HomePage = () => {
       <br />
       <br />
       <br />
-      <div ref={section2}>
-        <Text style={{ fontSize: 30 }} weight={600} mb="1rem" className={section2InView ? "fadeInText" : "hidden"}>
+      <div ref={section3}>
+        <Text
+          style={{ fontSize: 30 }}
+          weight={600}
+          mb="1rem"
+          className={section3InView ? "fadeInText" : "hidden"}
+        >
           The Transformer Architecture
         </Text>
-        <Text mb="1rem" className={section2InView ? "fadeFromLeft" : "hidden"}>
-          Already familiar with concepts in deep learning? This series provides an
-          in-depth look into the Transformer, an attention-driven sequence
-          transduction model. Arguably the most important deep learning
-          architecture right now, this architecture has yielded state-of-the-art
-          machine translation performance and drives models like GPT-3.
+        <Text mb="1rem" className={section3InView ? "fadeFromLeft" : "hidden"}>
+          Already familiar with concepts in deep learning? This series provides
+          an in-depth look into the Transformer, an attention-driven sequence
+          transduction model. One of the most important deep learning
+          architectures right now, the Transformer model has yielded
+          state-of-the-art machine translation performance and drives models
+          like GPT-3.
         </Text>
         <br />
         <Grid>
-          <Grid.Col span={4} className={section2InView ? "fadeFromLeft delay1" : "hidden"}>{transformerCard1}</Grid.Col>
-          <Grid.Col span={4} className={section2InView ? "fadeFromLeft delay2" : "hidden"}>{transformerCard2}</Grid.Col>
-          <Grid.Col span={4} className={section2InView ? "fadeFromLeft delay3" : "hidden"}>{transformerCard3}</Grid.Col>
+          <Grid.Col
+            span={4}
+            className={section3InView ? "fadeFromLeft delay1" : "hidden"}
+          >
+            {transformerCard1}
+          </Grid.Col>
+          <Grid.Col
+            span={4}
+            className={section3InView ? "fadeFromLeft delay2" : "hidden"}
+          >
+            {transformerCard2}
+          </Grid.Col>
+          <Grid.Col
+            span={4}
+            className={section3InView ? "fadeFromLeft delay3" : "hidden"}
+          >
+            {transformerCard3}
+          </Grid.Col>
         </Grid>
       </div>
     </div>

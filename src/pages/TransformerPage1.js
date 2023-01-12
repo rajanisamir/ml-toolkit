@@ -17,7 +17,7 @@ import ArticleImage from "../components/ArticleImage";
 import QKVDiagram from "../images/QKVDiagram.svg";
 import AttentionDiagram from "../images/AttentionDiagram.svg";
 
-import Translation from "../images/Translation.svg"
+import Translation from "../images/Translation.svg";
 
 const TransformerPage1 = () => {
   const contentRef = useRef(null);
@@ -55,7 +55,7 @@ const TransformerPage1 = () => {
         <div className="article-content-wrapper">
           <div className="article-content" ref={contentRef}>
             <ArticleTitle name={"The Transformer"} />
-            <ArticleSubtitle name={"Part 1: Paying Attention"}/> 
+            <ArticleSubtitle name={"Part 1: Paying Attention"} />
             <ArticleAuthor />
             <ArticleHeader sectionHeader={sectionHeaders[0]} />
             <p>
@@ -81,69 +81,65 @@ const TransformerPage1 = () => {
             <ArticleHeader sectionHeader={sectionHeaders[1]} />
             <p>
               The Transformer is a neural network architecture that was first
-              introduced in 2017 by Vaswani et al. in the paper
-              "Attention is All You Need." Since its introduction, the
-              model has spurred on major advancements in domains such as natural
-              langauge processing and computer vision; thus, understanding not
-              only its use cases, but also how it works under the hood, is
-              invaluable for machine learning engineers and hobbyists alike. The
-              Transformer is a model designed for sequence transduction, meaning
-              both the input and the output of the model are some sequence of
-              tokens. As an example, suppose we wanted to design a model that
-              could take as input an English sentence (say, the sentence, "I
-              made up a story") and output its Spanish translation ("Inventé una
-              historia"). Despite how naturally language comes to humans, it's
-              no secret that such a task is non-trivial for a machine; if you've
-              taken a course in a foreign language, you've likely joked about
-              how useless Google Translate could often be (though nowadays it's quite good). In this post, I'll
-              try to demystify the Transformer by trying to convince you that,
-              as a machine learning researcher with enough time and patience,
-              you might have come up with a similar idea yourself. Let's begin
-              by dissecting our toy example to better understand why this task
-              can quickly become quite complicated.
+              introduced in 2017 by Vaswani et al. in the paper "Attention is
+              All You Need." Since its introduction, the model has spurred on
+              major advancements in domains such as natural langauge processing
+              and computer vision; thus, understanding not only its use cases,
+              but also how it works under the hood, is invaluable for machine
+              learning engineers and hobbyists alike. The Transformer is a model
+              designed for sequence transduction, meaning both the input and the
+              output of the model are some sequence of tokens. As an example,
+              suppose we wanted to design a model that could take as input an
+              English sentence (say, the sentence, "I made up a story") and
+              output its Spanish translation ("Inventé una historia"). Despite
+              how naturally language comes to humans, it's no secret that such a
+              task is non-trivial for a machine; if you've taken a course in a
+              foreign language, you've likely joked about how useless Google
+              Translate could often be (though nowadays it's quite good). In
+              this post, I'll try to demystify the Transformer by trying to
+              convince you that, as a machine learning researcher with enough
+              time and patience, you might have come up with a similar idea
+              yourself. Let's begin by dissecting our toy example to better
+              understand why this task can quickly become quite complicated.
             </p>
-            <ArticleImage src={Translation} width="85%"/>
+            <ArticleImage src={Translation} width="85%" />
             <p>
               A naive language translation program might attempt to translate
               our sentence, "I made up a story," word-by-word. Our program might
-              begin by translating the word "I" to "yo."
-
-                  If you've taken an
-                  introductory Spanish course, you probably know the inclusion of
-                  the pronoun "yo" can sometimes be  superfluous, because the conjugation
-                  of the verb that follows would reveal that the sentence is in
-                  first-person. Certainly, however, what our program has done isn't
-                  incorrect. 
-
-               So far, so good. The next word, "made," the conjugated
-              form of the verb "to make," poses issues, though. The first issue
-              you might notice is that the verb "to make" in English is
-              typically translated to "hacer" is Spanish. Our example, however,
-              uses the phrase "made up," a phrase in which it <em>wouldn't</em>{" "}
-              make sense to use "hacer." The English verb "make" can have more
-              than one Spanish translation depending on the context. The verbs
-              used in the Spanish translations of "I made up with someone," "I
-              made a cake," and "I made up a story" would all be different. In
-              the first sentence, the meaning captured by "made" is related to
-              reconciliation, in the second sentence, creation, and in the
-              third, fabrication. If only the program had known the implications
-              of the word "up" on the translation of the word "made", it could
-              deal with our translation task, because it could understand that,
-              in context, we're talking about fabrication. Another issue is that
-              the program doesn't know what conjugation "made" should translate
-              to in Spanish. The word "made" serves as the past-tense
-              conjugation for every pronoun in English: the first-person
-              singular ("I made") and plural ("we made"), second-person singular
-              ("you made") and plural ("y'all made"), and third-person singular
-              ("they/he/she made") and plural ("they made"). In Spanish,
-              however, the verb's conjugated form depends on the preceding
-              pronoun: yo hice, tú hiciste, él/ella/usted hizo, nosotros
-              hicimos, vosotros hicisteis, ellos/ellas/ustedes hicieron.
-              Fundamentally, we have the same issue we had when choosing the
-              verb itself: without context, there does not exist a one-to-one
-              mapping from English to Spanish of the word "made". The key here
-              is <em>context</em>: if only there were some way for a program to
-              understand which words in a sentence should affect the
+              begin by translating the word "I" to "yo." If you've taken an
+              introductory Spanish course, you probably know the inclusion of
+              the pronoun "yo" can sometimes be superfluous, because the
+              conjugation of the verb that follows would reveal that the
+              sentence is in first-person. Certainly, however, what our program
+              has done isn't incorrect. So far, so good. The next word, "made,"
+              the conjugated form of the verb "to make," poses issues, though.
+              The first issue you might notice is that the verb "to make" in
+              English is typically translated to "hacer" is Spanish. Our
+              example, however, uses the phrase "made up," a phrase in which it{" "}
+              <em>wouldn't</em> make sense to use "hacer." The English verb
+              "make" can have more than one Spanish translation depending on the
+              context. The verbs used in the Spanish translations of "I made up
+              with someone," "I made a cake," and "I made up a story" would all
+              be different. In the first sentence, the meaning captured by
+              "made" is related to reconciliation, in the second sentence,
+              creation, and in the third, fabrication. If only the program had
+              known the implications of the word "up" on the translation of the
+              word "made", it could deal with our translation task, because it
+              could understand that, in context, we're talking about
+              fabrication. Another issue is that the program doesn't know what
+              conjugation "made" should translate to in Spanish. The word "made"
+              serves as the past-tense conjugation for every pronoun in English:
+              the first-person singular ("I made") and plural ("we made"),
+              second-person singular ("you made") and plural ("y'all made"), and
+              third-person singular ("they/he/she made") and plural ("they
+              made"). In Spanish, however, the verb's conjugated form depends on
+              the preceding pronoun: yo hice, tú hiciste, él/ella/usted hizo,
+              nosotros hicimos, vosotros hicisteis, ellos/ellas/ustedes
+              hicieron. Fundamentally, we have the same issue we had when
+              choosing the verb itself: without context, there does not exist a
+              one-to-one mapping from English to Spanish of the word "made". The
+              key here is <em>context</em>: if only there were some way for a
+              program to understand which words in a sentence should affect the
               translations of others, it might be able to deal with this task.
               We might separate this task of context into two sub-tasks: first,
               for each word in a sentence, our model must understand{" "}
@@ -300,20 +296,20 @@ const TransformerPage1 = () => {
               "encoder-decoder" architecture, which is a fancy way of saying
               that the English sentence is translated into an "intermediate
               representation," which consists of <em>context-aware</em> word
-              embeddings, and then that intermediate representation is
-              translated to Spanish. In the encoder, the English words pay
-              attention to other English words to turn themselves into
-              context-aware embeddings. In the decoder, the context-aware
-              embeddings determine which Spanish words are included in the
-              translation.
+              embeddings, and then that intermediate representation is used as a
+              guideline to construct the Spanish translation. In the encoder,
+              the English words pay attention to other English words to turn
+              themselves into context-aware embeddings. In the decoder, the
+              context-aware embeddings determine which Spanish words are
+              included in the translation.
             </p>
             <p>
               Putting it all together, to create context-aware embeddings for a
               given word (say, "made"), we take a dot product of that word's
-              query with each other word's value, which yields an attention
-              score for each word (including the word "made"). We then multiply
-              each word's value by its attention score, and sum up the results.
-              The result is a context-aware embedding that contains some sort of
+              query with each other word's key, which yields an attention score
+              for each word (including the word "made"). We then multiply each
+              word's value by its attention score, and sum up the results. The
+              result is a context-aware embedding that contains some sort of
               "semantic essence" of the word "made." For example, this
               context-aware embedding likely includes the information that this
               "made" is associated with a future word "up," and thus refers to

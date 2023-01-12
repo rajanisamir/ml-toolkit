@@ -6,9 +6,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.4",
-    "@mantine/core": "^5.6.3",
     "@mantine/ds": "^5.6.3",
-    "@mantine/hooks": "^5.6.3",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.9",
     "@tabler/icons": "^1.109.0",

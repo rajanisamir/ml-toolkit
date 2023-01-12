@@ -6,39 +6,37 @@ const NavBar = () => {
     <HeaderAction
       links={[
         {
-          label: "Model Architectures",
+          label: "The Transformer",
           links: [
-            { link: "/transformer1", label: "Transformer" },
+            { link: "/transformer1", label: "Part 1: Paying Attention" },
             {
-              link: "/coming-soon",
-              label: "Convolutional Neural Network (CNN)",
+              link: "/transformer2",
+              label: "Part 2: Multi-Head Attention & the Encoder",
             },
-            { link: "/coming-soon", label: "Linear Classifier" },
-            { link: "/coming-soon", label: "Autoencoder" },
+            { link: "/transformer3", label: "Part 3: The Decoder" },
           ],
         },
         {
-          label: "Machine Learning Concepts",
+          label: "Convolutional Neural Networks",
           links: [
             {
               link: "/coming-soon",
-              label: "Layer Norm, Batch Norm, and All That",
+              label: "Part 1: Motivation and Image Classificiation",
             },
             {
               link: "/coming-soon",
-              label: "Unsupervised, Supervised, and Self-Supervised Learning",
+              label: "Part 2: Convolutions and Max Pooling",
             },
             {
               link: "/coming-soon",
-              label: "Self-Supervised Learning, In Detail",
+              label: "Part 3: Improving Upon an MLP for Digit Recognition",
             },
-            { link: "/coming-soon", label: "Backpropagation" },
           ],
         },
         {
           label: "About",
-          link: "/about"
-        }
+          link: "/about",
+        },
       ]}
     />
   );

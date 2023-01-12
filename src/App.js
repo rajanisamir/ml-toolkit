@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useState } from "react";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -12,15 +11,20 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import TransformerPage1 from "./pages/TransformerPage1";
 import TransformerPage2 from "./pages/TransformerPage2";
+import TransformerPage3 from "./pages/TransformerPage3";
+import DropoutPage from "./pages/DropoutPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 
 function App() {
-  const [colorScheme, setColorScheme] = useState('light');
+  const [colorScheme, setColorScheme] = useState("light");
   const toggleColorScheme = (value) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   return (
-    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={toggleColorScheme}
+    >
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
@@ -38,7 +42,7 @@ function App() {
             to: "indigo",
             deg: 45,
           },
-          colorScheme
+          colorScheme,
         }}
       >
         <Router basename={process.env.PUBLIC_URL}>
@@ -60,8 +64,19 @@ function App() {
                   <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about" element={<AboutPage />} />
-                    <Route path="/transformer1" element={<TransformerPage1 />} />
-                    <Route path="/transformer2" element={<TransformerPage2 />} />
+                    <Route
+                      path="/transformer1"
+                      element={<TransformerPage1 />}
+                    />
+                    <Route
+                      path="/transformer2"
+                      element={<TransformerPage2 />}
+                    />
+                    <Route
+                      path="/transformer3"
+                      element={<TransformerPage3 />}
+                    />
+                    <Route path="/dropout" element={<DropoutPage />} />
                     <Route path="/coming-soon" element={<ComingSoonPage />} />
                   </Routes>
                 </ScrollToTop>
