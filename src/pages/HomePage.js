@@ -6,12 +6,21 @@ import ArticleCard from "../components/ArticleCard";
 
 import QKVDiagram from "../images/QKVDiagram.svg";
 import EncoderDiagram from "../images/EncoderDiagram.svg";
-import DropoutDiagram from "../images/DropoutDiagram.svg";
+import DropoutThumbnail from "../images/DropoutThumbnail.svg";
+import SkipConnectionThumbnail from "../images/SkipConnectionThumbnail.svg";
+import AutoencoderThumbnail from "../images/AutoencoderThumbnail.svg";
+import TTTIntroThumbnail from "../images/TTTIntroThumbnail.svg";
 
 const HomePage = () => {
-  const { ref: section1, inView: section1InView } = useInView();
-  const { ref: section2, inView: section2InView } = useInView();
-  const { ref: section3, inView: section3InView } = useInView();
+  const { ref: section1, inView: section1InView } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: section2, inView: section2InView } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: section3, inView: section3InView } = useInView({
+    triggerOnce: true,
+  });
 
   // const backpropagationCard = (
   //   <ArticleCard
@@ -27,9 +36,54 @@ const HomePage = () => {
   const dropoutCard = (
     <ArticleCard
       name="Dropout"
-      description="Learn about how dropout layers help prevent overfitting in neural networks, and work through an experiment in PyTorch."
-      img={DropoutDiagram}
+      description="Learn about how dropout layers help prevent overfitting in neural networks."
+      img={DropoutThumbnail}
       pagePath="/dropout"
+    />
+  );
+
+  const skipConnectionsCard = (
+    <ArticleCard
+      name="Skip Connections"
+      description="Why do deeper neural networks sometimes perform worse, and how can we fix that?"
+      img={SkipConnectionThumbnail}
+      pagePath="/skip-connections"
+    />
+  );
+
+  const autoencoderCard = (
+    <ArticleCard
+      name="Autoencoders"
+      description="How can a neural network learn useful features from unlabeled training data?"
+      img={AutoencoderThumbnail}
+      pagePath="/autoencoders"
+    />
+  );
+
+  const tttIntroCard = (
+    <ArticleCard
+      name="Setup and Introduction"
+      description="We'll define the problem we wish to solve and implement tic-tac-toe in Python as a starting point for developing capable AI."
+      img={TTTIntroThumbnail}
+      pagePath="/ttt-intro"
+    />
+  );
+
+  const minimaxCard = (
+    <ArticleCard
+      name="Minimax and Alpha-Beta Pruning"
+      description="How can we implement an algorithm that achieves perfect play in tic-tac-toe?"
+      img={TTTIntroThumbnail}
+      pagePath="/minimax"
+    />
+  );
+
+  const mctsCard = (
+    <ArticleCard
+      name="Monte Carlo Tree Search"
+      description="We discuss and implement MCTS, an algorithm capable of approximating perfect play by continuously improving its predictions."
+      img={TTTIntroThumbnail}
+      pagePath="/mcts"
     />
   );
 
@@ -48,7 +102,7 @@ const HomePage = () => {
     <ArticleCard
       name="The Transformer, Part 2"
       // description="Already familiar with concepts in deep learning? This article provides an in-depth look into the Transformer, an attention-driven sequence transduction model. Arguably the most important deep learning architecture right now, this architecture has yielded state-of-the-art machine translation performance and drives models like GPT-3."
-      description="We provide a treatment of multi-headed attention and positional encoding to finish describing the encoder of the Transformer."
+      description="We provide a treatment of multi-head attention and positional encoding to finish describing the encoder of the Transformer."
       img={EncoderDiagram}
       pagePath="/transformer2"
     />
@@ -110,9 +164,9 @@ const HomePage = () => {
           What do deep learning researchers mean by "regularization"? Should you
           be adding dropout layers to your neural network? What is the
           difference between batch normalization and layer normalization? Why
-          have residual connections become so prevalent? We'll take a deep dive
-          into several techniques used in constructing and training neural
-          networks, with hands-on experiments in PyTorch.
+          have skip connections become so prevalent? We'll take a deep dive into
+          several techniques used in constructing and training neural networks,
+          with hands-on experiments in PyTorch.
         </Text>
         <br />
         <Grid>
@@ -122,15 +176,65 @@ const HomePage = () => {
           >
             {dropoutCard}
           </Grid.Col>
-          {/* <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay2" : "hidden"}>{backpropagationCard}</Grid.Col>
-          <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay3" : "hidden"}>{backpropagationCard}</Grid.Col> */}
+          <Grid.Col
+            span={4}
+            className={section1InView ? "fadeFromLeft delay1" : "hidden"}
+          >
+            {skipConnectionsCard}
+          </Grid.Col>
+          <Grid.Col
+            span={4}
+            className={section1InView ? "fadeFromLeft delay1" : "hidden"}
+          >
+            {autoencoderCard}
+          </Grid.Col>
         </Grid>
       </div>
       <br />
       <br />
       <br />
       <div ref={section2}>
-        {/* <Text
+        <Text
+          style={{ fontSize: 30 }}
+          weight={600}
+          mb="1rem"
+          className={section2InView ? "fadeInText" : "hidden"}
+        >
+          Games and Reinforcement Learning
+        </Text>
+        <Text mb="1rem" className={section2InView ? "fadeFromLeft" : "hidden"}>
+          In 2016, DeepMind's AlphaGo became the first computer program to
+          defeat a 9-dan professional Go player, a feat which was at the time
+          thought to be a decade or more away. To understand both why achieving
+          superhuman Go performance was understood to be such a herculean task,
+          and how AlphaGo managed to crack it, we'll start from the basics of
+          writing AI for games of perfect information, eventually working our
+          way toward AlphaGo's architecture for ourselves.
+        </Text>
+        <br />
+        <Grid>
+          <Grid.Col
+            span={4}
+            className={section2InView ? "fadeFromLeft delay1" : "hidden"}
+          >
+            {tttIntroCard}
+          </Grid.Col>
+          <Grid.Col
+            span={4}
+            className={section2InView ? "fadeFromLeft delay1" : "hidden"}
+          >
+            {minimaxCard}
+          </Grid.Col>
+          <Grid.Col
+            span={4}
+            className={section2InView ? "fadeFromLeft delay1" : "hidden"}
+          >
+            {mctsCard}
+          </Grid.Col>
+        </Grid>
+      </div>
+      {/* <div ref={section2}> */}
+      {/* <Text
           style={{ fontSize: 30 }}
           weight={600}
           mb="1rem"
@@ -146,7 +250,7 @@ const HomePage = () => {
           be well-equipped to move onto more advanced concepts like
           convolutional neural networks.
         </Text> */}
-        <Text
+      {/* <Text
           style={{ fontSize: 30 }}
           weight={600}
           mb="1rem"
@@ -161,14 +265,14 @@ const HomePage = () => {
           problems to reinforce your understanding, and provide a hands-on
           implementation exercise in PyTorch to compare the performance of CNNs
           with MLPs on a simple optical character recognition task.
-        </Text>
-        <br />
-        {/* <Grid>
+        </Text> */}
+      {/* <br /> */}
+      {/* <Grid>
           <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay1" : "hidden"}>{backpropagationCard}</Grid.Col>
           <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay2" : "hidden"}>{backpropagationCard}</Grid.Col>
           <Grid.Col span={4} className={section1InView ? "fadeFromLeft delay3" : "hidden"}>{backpropagationCard}</Grid.Col>
         </Grid> */}
-      </div>
+      {/* </div> */}
       <br />
       <br />
       <br />

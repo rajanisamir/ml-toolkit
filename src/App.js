@@ -13,6 +13,9 @@ import TransformerPage1 from "./pages/TransformerPage1";
 import TransformerPage2 from "./pages/TransformerPage2";
 import TransformerPage3 from "./pages/TransformerPage3";
 import DropoutPage from "./pages/DropoutPage";
+import SkipConnectionPage from "./pages/SkipConnectionPage";
+import AutoencoderPage from "./pages/AutoencoderPage";
+import TTTIntroPage from "./pages/TTTIntroPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 
 function App() {
@@ -77,6 +80,12 @@ function App() {
                       element={<TransformerPage3 />}
                     />
                     <Route path="/dropout" element={<DropoutPage />} />
+                    <Route
+                      path="/skip-connections"
+                      element={<SkipConnectionPage />}
+                    />
+                    <Route path="/autoencoders" element={<AutoencoderPage />} />
+                    <Route path="/ttt-intro" element={<TTTIntroPage />} />
                     <Route path="/coming-soon" element={<ComingSoonPage />} />
                   </Routes>
                 </ScrollToTop>

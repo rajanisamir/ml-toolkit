@@ -220,25 +220,18 @@ const TransformerPage1 = () => {
               the idea that vectors pointing in the same direction should pay
               attention to each other. This approach almost works, but there's
               one small issue: the dot product operation is commutative. In
-              other words, for two word embeddings a and b,
-            </p>
-            <BlockEq
-              text="$$
-          a \cdot b = b \cdot a
-          $$"
-              displayMode={true}
-            />
-            <p>
-              See the issue? For concreteness, suppose "a" is the vector
-              representing the word "I," while "b" is the vector representing
-              the word "made." The implication of using a dot product to compute
-              an attention score is that "I" should pay as much attention to
-              "made" as "made" should to "I," which is not in general true. You
-              might imagine, for example, that "made" should pay attention to
-              "I," because the conjugation of the verb depends on the pronoun,
-              but "I" doesn't care too much about being followed by the word
-              "made" for the purposes of translation, because it will
-              nonetheless be translated as "yo."
+              other words, for two word embeddings <Eq text="$a$" /> and{" "}
+              <Eq text="$b$" />, <Eq text="$a \cdot b = b \cdot a$" />. See the
+              issue? For concreteness, suppose "a" is the vector representing
+              the word "I," while "b" is the vector representing the word
+              "made." The implication of using a dot product to compute an
+              attention score is that "I" should pay as much attention to "made"
+              as "made" should to "I," which is not in general true. You might
+              imagine, for example, that "made" should pay attention to "I,"
+              because the conjugation of the verb depends on the pronoun, but
+              "I" doesn't care too much about being followed by the word "made"
+              for the purposes of translation, because it will nonetheless be
+              translated as "yo."
             </p>
             <p>
               We might be a bit disheartened by the realization that our nifty
@@ -427,20 +420,20 @@ const TransformerPage1 = () => {
               incorporate the values. As a refresher, let's quickly go over how
               we planned to use the values to produce context-aware embeddings.
               Let's suppose we're computing the context-aware embedding for the{" "}
-              <Eq text={"$k^\\text{th}$"} /> word in the sentence (I'm using{" "}
-              <Eq text={"$k$"} /> here instead of <Eq text={"$i$"} /> to clarify
+              <Eq text="$k^\text{th}$" /> word in the sentence (I'm using{" "}
+              <Eq text="$k$" /> here instead of <Eq text="$i$" /> to clarify
               that we're focusing on one particular word for this example). We
               would first need to grab all of the attention scores{" "}
-              <Eq text={"$A_{kj}$"} />, which correspond with the relative
-              attention the <Eq text={"$k^\\text{th}$"} /> word needs to pay to
+              <Eq text="$A_{kj}$" />, which correspond with the relative
+              attention the <Eq text="$k^\text{th}$" /> word needs to pay to
               each of the words in the input sentence. Then, for each of those
               words, we should multiply the attention score by the word's value
               vector, and sum these all up to produce the context-aware
-              embedding for the <Eq text={"$k^\\text{th}$"} /> word. We would
-              need to repeat this process for each word in the input sentence to
+              embedding for the <Eq text="$k^\text{th}$" /> word. We would need
+              to repeat this process for each word in the input sentence to
               compute all of the context-aware embeddings. To represent this
               computation neatly, we'll first need to introduce a matrix{" "}
-              <Eq text={"$V$"} /> that contains the values for each input word,
+              <Eq text="$V$" /> that contains the values for each input word,
               just as we did for the keys and queries:
             </p>
             <BlockEq
@@ -513,22 +506,19 @@ const TransformerPage1 = () => {
                 </li>
                 <li>
                   Second, the paper divides the attention scores by{" "}
-                  <Eq text={"$\\sqrt{d_k}$"} /> before applying the softmax
-                  function, where <Eq text={"$d_k$"} /> refers to the dimension
-                  of the keys, which in our example is 512. You probably
-                  shouldn't worry too much about this term: in fact, the paper's
-                  tone suggests that they were quite uncertain about its effect,
-                  even though they found it improved the performance. I'll just
-                  quote them here:
-                  <Blockquote cite="–Attention is All You Need (2017)">
-                    We suspect that for large values of dk, the dot products
-                    grow large in magnitude, pushing the softmax function into
-                    regions where it has extremely small gradients. To
-                    counteract this effect, we scale the dot products by{" "}
-                    <Eq text={"$1/{\\sqrt{d_k}}$"} />.
-                  </Blockquote>
-                  This term is why the form of attention in the Transformer is
-                  referred to as "<em>scaled</em> dot-product attention":
+                  <Eq text="$\sqrt{d_k}$" /> before applying the softmax
+                  function, where <Eq text="$d_k$" /> refers to the dimension of
+                  the keys, which in our example is 512. You probably shouldn't
+                  worry too much about this term: in fact, the paper's tone
+                  suggests that they were quite uncertain about its effect, even
+                  though they found it improved the performance. The authors
+                  state, "We suspect that for large values of dk, the dot
+                  products grow large in magnitude, pushing the softmax function
+                  into regions where it has extremely small gradients. To
+                  counteract this effect, we scale the dot products by{" "}
+                  <Eq text="$$\frac{1}{\sqrt{d_k}}$$" />
+                  ." This term is why the form of attention in the Transformer
+                  is referred to as "<em>scaled</em> dot-product attention":
                   because the dot products between the queries and keys are
                   subsequently scaled.
                 </li>
@@ -542,7 +532,7 @@ const TransformerPage1 = () => {
             </p>
             <BlockEq
               text="$$
-                \text{Attention}(Q, K, V) = \text{softmax}(QK^T / \sqrt{d_k})V
+                \text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V
               $$"
               displayMode={true}
             />

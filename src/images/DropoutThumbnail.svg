@@ -1,0 +1,34 @@
+<svg width="314" height="430" viewBox="0 0 314 430" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M25 120L157 310" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M25 120L157 405" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M25 214L157 405" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M25 214L157 310" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M25 214L157 120" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M25 119L157 120" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M289 309L157 310" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M289 120L157 310" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M289 120L157 405" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M289 310L157 120" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M289 310L157 405" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M289 214L157 405" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M289 214L157 310" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M289 214L157 120" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<path d="M289 119L157 120" stroke="#222222" stroke-width="4" stroke-linecap="square"/>
+<circle cx="25" cy="120" r="25" fill="#D9D9D9"/>
+<circle cx="25" cy="215" r="25" fill="#D9D9D9"/>
+<circle cx="25" cy="310" r="25" fill="#D9D9D9"/>
+<circle cx="25" cy="120" r="25" fill="#48BFE3"/>
+<circle cx="25" cy="215" r="25" fill="#48BFE3"/>
+<circle cx="25" cy="310" r="25" fill="#48BFE3" fill-opacity="0.2"/>
+<circle cx="289" cy="120" r="25" fill="#D9D9D9"/>
+<circle cx="289" cy="215" r="25" fill="#D9D9D9"/>
+<circle cx="289" cy="310" r="25" fill="#D9D9D9"/>
+<circle cx="289" cy="120" r="25" fill="#48BFE3"/>
+<circle cx="289" cy="215" r="25" fill="#48BFE3"/>
+<circle cx="289" cy="310" r="25" fill="#48BFE3"/>
+<circle cx="157" cy="120" r="25" fill="#5E60CE"/>
+<circle cx="157" cy="25" r="25" fill="#5E60CE" fill-opacity="0.2"/>
+<circle cx="157" cy="215" r="25" fill="#5E60CE" fill-opacity="0.2"/>
+<circle cx="157" cy="310" r="25" fill="#5E60CE"/>
+<circle cx="157" cy="405" r="25" fill="#5E60CE"/>
+</svg>

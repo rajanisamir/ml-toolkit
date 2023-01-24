@@ -7,7 +7,7 @@ const ArticleCard = ({
   inDevelopment = false,
   comingSoon = false,
   img,
-  fit="contain",
+  fit = "contain",
   pagePath,
 }) => {
   const navigate = useNavigate();
@@ -15,9 +15,14 @@ const ArticleCard = ({
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
       <Card.Section>
-        <Image src={img} height={160} alt={`${name} Thumbnail`} fit={fit} />
+        <Image
+          src={img}
+          height={160}
+          alt={`${name} Thumbnail`}
+          fit={fit}
+          style={{ padding: fit == "contain" ? 15 : 0 }}
+        />
       </Card.Section>
-
       <Group position="apart" mt="md" mb="xs">
         <Text weight={500}>{name}</Text>
         {inDevelopment ? (

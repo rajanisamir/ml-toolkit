@@ -85,3 +85,11 @@
     opacity: 1;
   }
 }
+
+/* 
+From https://github.com/KaTeX/KaTeX/issues/1775 
+Fixes issue with fraction lines not showing up.
+*/
+.katex .mfrac .frac-line {
+  border-bottom-style: solid;
+}

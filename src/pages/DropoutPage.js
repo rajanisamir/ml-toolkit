@@ -5,14 +5,12 @@ import { Anchor, Code } from "@mantine/core";
 import { Prism } from "@mantine/prism";
 
 import Eq from "../components/Eq";
-import BlockEq from "../components/BlockEq";
 
 import ArticleNavigation from "../components/ArticleNavigation";
 import ArticleHeader from "../components/ArticleHeader";
 import ArticleTitle from "../components/ArticleTitle";
 import ArticleSubtitle from "../components/ArticleSubtitle";
 import ArticleAuthor from "../components/ArticleAuthor";
-import ArticleFeedback from "../components/ArticleFeedback";
 import ArticleImage from "../components/ArticleImage";
 
 import mnist from "../images/mnist.png";
@@ -133,20 +131,24 @@ const DropoutPage = () => {
               of "3" can be attributed primarily to random chance. However,
               because our training set is so small, our model doesn't know any
               better than to rely on this pixel: it's as good of a feature for
-              classification as any other. The model has essentially overfit on
-              the training data, and its reliance on a particular pixel would
-              inhibit its performance on a test set. Of course, it is
-              unrealistic for a training set to contain only six images, but
-              this example illustrates a more general issue: a model might pick
-              up on features resulting from noise that help it perform well on
-              the training data, but ones which are not useful in general.
-              Here's where dropout comes in handy.
+              classification as any other. Yet, the model's reliance on a
+              particular pixel would inhibit its performance on a test set. Of
+              course, it is unrealistic for a training set to contain only six
+              images, but this example illustrates a more general issue that
+              manifests when overfitting occurs: a model might pick up on
+              features resulting from noise that help it perform well on the
+              training data, but ones which are not useful in general. We
+              typically think of overfitting in the context of training too
+              complex of a model for too long on a training set, leading to this
+              same problem in which false patterns that appear only in the
+              training data are used to help make predictions. Here's where
+              dropout comes in handy.
             </p>
             <ArticleHeader sectionHeader={sectionHeaders[2]} />
             <p>
-              In the dropout technique, during training, with some probability,
-              each neuron in the input layer and the hidden layer may be
-              removed, meaning it does not contribute to the next layer. The
+              In the dropout technique, during training, each neuron in the
+              input layer and the hidden layer(s) may be removed with some
+              probability, meaning it does not contribute to the next layer. The
               figure below illustrates what a simple multi-layer perceptron
               might look like with and without dropout.
             </p>
@@ -157,29 +159,29 @@ const DropoutPage = () => {
             />
             <p>
               It should be noted that dropout only occurs during training, so
-              that the network can use all of the input data and features during
-              inference. Moreover, during training, it is standard to rescale
-              the outputs of the neurons that are not removed by a factor of{" "}
-              <Eq text="$1/(1-p)$" />, where <Eq text="$p$" /> is the
-              probability of dropout, in order to compensate for the weights of
-              the neurons that are removed.
+              that the network can make use of all of the input data and
+              features during inference. Moreover, during training, it is
+              standard to rescale the outputs of the neurons that are not
+              removed by a factor of <Eq text="$1/(1-p)$" />, where{" "}
+              <Eq text="$p$" /> is the probability of dropout, in order to
+              compensate for the weights of the neurons that are removed.
             </p>
             <p>
               With dropout, the neural network can no longer rely on the
               presence of particular neurons to fit its training data, so it
-              must learn several useful features that are independent of each
-              other. In the context of our example on the MNIST dataset, relying
-              on the value of one particular pixel is no longer a viable
-              strategy, because that pixel, or a neuron in a hidden layer
-              corresponding with that feature, might be dropped out. The
-              original paper on the dropout technique, "Improving neural
-              networks by preventing co-adaptation of feature detectors" (Hinton
-              et al. 2012) suggests that dropout can be thought of as a means of
-              preventing "complex co-adaptations in which a feature detector is
-              only helpful in the context of several other specific feature
-              detectors." We can also think of our pathological example in the
-              MNIST dataset as learning co-adapted features, or features that
-              rely on each other. One neuron in the hidden layer of our
+              must learn to make use of several useful features that are
+              independent of each other. In the context of our example on the
+              MNIST dataset, relying on the value of one particular pixel is no
+              longer a viable strategy, because that pixel, or a neuron in a
+              hidden layer corresponding with that feature, might be dropped
+              out. The original paper on the dropout technique, "Improving
+              neural networks by preventing co-adaptation of feature detectors"
+              (Hinton et al. 2012) suggests that dropout can be thought of as a
+              means of preventing "complex co-adaptations in which a feature
+              detector is only helpful in the context of several other specific
+              feature detectors." We can also think of our pathological example
+              in the MNIST dataset as learning co-adapted features, or features
+              that rely on each other. One neuron in the hidden layer of our
               classifier might take on a value based on the color of the pixel
               at position (15, 15), and the other neurons might learn to cancel
               each other out. The latter neurons are co-adapted with the former,
@@ -196,8 +198,8 @@ const DropoutPage = () => {
             <p>
               To illustrate the utility of incoporating dropout in the training
               of neural networks, we'll run an experiment in PyTorch adapted
-              from one the experiments from the original paper. The example code
-              is built off the MNIST code from the{" "}
+              from one the experiments from the original paper. The code I wrote
+              for this exercise is built off the MNIST code from the{" "}
               <Anchor
                 href="https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html"
                 target="_blank"
