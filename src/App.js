@@ -36,7 +36,7 @@ function App() {
           fontSizes: {
             xs: 12,
             sm: 14,
-            md: 18,
+            md: 17,
             lg: 24,
             xl: 28,
           },
@@ -53,14 +53,14 @@ function App() {
             <AppShell
               padding="md"
               header={<Navbar />}
-              styles={(theme) => ({
-                main: {
-                  backgroundColor:
-                    theme.colorScheme === "dark"
-                      ? theme.colors.dark[8]
-                      : theme.colors.gray[0],
-                },
-              })}
+              //   styles={(theme) => ({
+              //     main: {
+              //       backgroundColor:
+              //         theme.colorScheme === "dark"
+              //           ? theme.colors.dark[8]
+              //           : theme.colors.gray[0],
+              //     },
+              //   })}
             >
               <div className="content">
                 <ScrollToTop>

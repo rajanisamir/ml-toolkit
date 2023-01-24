@@ -217,7 +217,7 @@ const DropoutPage = () => {
               as well as matplotlib.pyplot, which will allow us to plot our
               results.
             </p>
-            <Prism language="python" withLineNumbers>
+            <Prism language="python">
               {`import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -240,7 +240,7 @@ from matplotlib import pyplot as plt`}
               paper, we'll use a dropout probability of 0.2 for the input layer,
               and a dropout probability of 0.5 for each hidden layer.
             </p>
-            <Prism language="python" withLineNumbers>
+            <Prism language="python">
               {`class NeuralNetwork(nn.Module):
     def __init__(self):
         super().__init__()
@@ -284,7 +284,7 @@ class DropoutNeuralNetwork(nn.Module):
               minor modifications in <Code>test()</Code> to return the accuracy,
               allowing us to track the performance of each model over time.
             </p>
-            <Prism language="python" withLineNumbers>
+            <Prism language="python">
               {`def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     model.train()
@@ -331,7 +331,7 @@ def test(dataloader, model, loss_fn):
               50 epochs for the separation between the two models to become
               clear.
             </p>
-            <Prism language="python" withLineNumbers>
+            <Prism language="python">
               {`if __name__ == "__main__":
     # Download training data from open datasets.
     training_data = datasets.MNIST(

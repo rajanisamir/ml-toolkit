@@ -63,7 +63,7 @@ const HomePage = () => {
   const tttIntroCard = (
     <ArticleCard
       name="Setup and Introduction"
-      description="We'll define the problem we wish to solve and implement tic-tac-toe in Python as a starting point for developing capable AI."
+      description="We'll implement tic-tac-toe in Python as a starting point for developing capable AI for games."
       img={TTTIntroThumbnail}
       pagePath="/ttt-intro"
     />
@@ -90,7 +90,6 @@ const HomePage = () => {
   const transformerCard1 = (
     <ArticleCard
       name="The Transformer, Part 1"
-      // description="Already familiar with concepts in deep learning? This article provides an in-depth look into the Transformer, an attention-driven sequence transduction model. Arguably the most important deep learning architecture right now, this architecture has yielded state-of-the-art machine translation performance and drives models like GPT-3."
       description="How does scaled dot-product attention accomodate long-range dependencies in sequences?"
       img={QKVDiagram}
       fit="cover"
@@ -101,7 +100,6 @@ const HomePage = () => {
   const transformerCard2 = (
     <ArticleCard
       name="The Transformer, Part 2"
-      // description="Already familiar with concepts in deep learning? This article provides an in-depth look into the Transformer, an attention-driven sequence transduction model. Arguably the most important deep learning architecture right now, this architecture has yielded state-of-the-art machine translation performance and drives models like GPT-3."
       description="We provide a treatment of multi-head attention and positional encoding to finish describing the encoder of the Transformer."
       img={EncoderDiagram}
       pagePath="/transformer2"
@@ -111,7 +109,6 @@ const HomePage = () => {
   const transformerCard3 = (
     <ArticleCard
       name="The Transformer, Part 3"
-      // description="Already familiar with concepts in deep learning? This article provides an in-depth look into the Transformer, an attention-driven sequence transduction model. Arguably the most important deep learning architecture right now, this architecture has yielded state-of-the-art machine translation performance and drives models like GPT-3."
       description="We describe the architecture of the Transformer's decoder and finalize the details of the the model."
       inDevelopment="true"
       img={QKVDiagram}
@@ -141,8 +138,8 @@ const HomePage = () => {
       <br />
       <br />
       <Text style={{ fontSize: 21 }}>
-        Building machine learning applications shouldn't be complicated. ML
-        Toolkit is an educational resource that eschews both the information
+        Finding high-quality machine learning resources shouldn't be an ordeal.
+        ML Toolkit is an educational resource that eschews both the information
         density of technical research papers and the inconsistent explanations
         of many learning resources to provide a no-compromises means of
         understanding complex but powerful concepts.
@@ -208,8 +205,8 @@ const HomePage = () => {
           thought to be a decade or more away. To understand both why achieving
           superhuman Go performance was understood to be such a herculean task,
           and how AlphaGo managed to crack it, we'll start from the basics of
-          writing AI for games of perfect information, eventually working our
-          way toward AlphaGo's architecture for ourselves.
+          writing AI for games of perfect information, and we'll work our way
+          toward replicating the architecture behind AlphaGo.
         </Text>
         <br />
         <Grid>

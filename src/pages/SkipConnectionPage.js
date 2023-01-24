@@ -228,7 +228,7 @@ const SkipConnectionPage = () => {
               as well as matplotlib.pyplot, which will allow us to plot our
               results.
             </p>
-            <Prism language="python" withLineNumbers>
+            <Prism language="python">
               {`import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -248,7 +248,7 @@ from matplotlib import pyplot as plt`}
               not to add the original input to the output vector (i.e. whether
               or not to include a skip connection).
             </p>
-            <Prism language="python" withLineNumbers>
+            <Prism language="python">
               {`class Block(nn.Module):
     def __init__(self, residual):
         super().__init__()
@@ -283,7 +283,7 @@ from matplotlib import pyplot as plt`}
               and an 10-dimensional output layer, corresponding with the number
               of classes of digits in the dataset. Here's the code for the{" "}
               <Code>NeuralNetwork</Code> module:
-              <Prism language="python" withLineNumbers>
+              <Prism language="python">
                 {`class NeuralNetwork(nn.Module):
     def __init__(self, residual, num_blocks):
         super().__init__()
@@ -308,7 +308,7 @@ from matplotlib import pyplot as plt`}
               neural network and evaluate its performance. These functions are
               taken almost directly from the PyTorch Quickstart Guide.
             </p>
-            <Prism language="python" withLineNumbers>
+            <Prism language="python">
               {`def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     model.train()
@@ -355,7 +355,7 @@ def test(dataloader, model, loss_fn):
               values. I used the Adam optimizer instead of manually finding an
               appopriate learning rate scheudle to keep things simple.
             </p>
-            <Prism language="python" withLineNumbers>
+            <Prism language="python">
               {`if __name__ == "__main__":
     # Download training data from open datasets.
     training_data = datasets.MNIST(
