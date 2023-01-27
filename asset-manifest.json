@@ -1,20 +1,39 @@
 {
   "files": {
-    "main.css": "/ml-toolkit/static/css/main.ed9f88c7.css",
-    "main.js": "/ml-toolkit/static/js/main.ecd51375.js",
+    "main.css": "/ml-toolkit/static/css/main.ecc5667d.css",
+    "main.js": "/ml-toolkit/static/js/main.3a55abad.js",
     "static/js/787.a0e8c8df.chunk.js": "/ml-toolkit/static/js/787.a0e8c8df.chunk.js",
+    "static/media/ArbitraryGameTreeAnimation.webp": "/ml-toolkit/static/media/ArbitraryGameTreeAnimation.58dd848b542e4af4e168.webp",
     "static/media/AttentionDiagram.svg": "/ml-toolkit/static/media/AttentionDiagram.c15ba31961a2b80ecc04fab531dbca20.svg",
     "static/media/EncoderDiagram.svg": "/ml-toolkit/static/media/EncoderDiagram.adfae42e9e5e3655aa1c9f658d74e98d.svg",
-    "static/media/QKVDiagram.svg": "/ml-toolkit/static/media/QKVDiagram.8db4c6b0910f9fd4cc918edb68edc38f.svg",
-    "static/media/logo.png": "/ml-toolkit/static/media/logo.3213c751e29746385e77.png",
-    "static/media/logo_dark.png": "/ml-toolkit/static/media/logo_dark.53501f70f735c638c299.png",
+    "static/media/MultiHeadAttentionDiagram.svg": "/ml-toolkit/static/media/MultiHeadAttentionDiagram.83ae34e2600a4f99517d0dff475f05e2.svg",
+    "static/media/SkipConnectionDiagram2.svg": "/ml-toolkit/static/media/SkipConnectionDiagram2.634b00b240200ce1cb00f53de9ed64ec.svg",
+    "static/media/QKVDiagram.svg": "/ml-toolkit/static/media/QKVDiagram.c765a1dc3fdfae94c3d7223bf73076d8.svg",
+    "static/media/skip_connection_experiment_graph.png": "/ml-toolkit/static/media/skip_connection_experiment_graph.cbedd6d18d65bf43c4af.png",
+    "static/media/Translation.svg": "/ml-toolkit/static/media/Translation.d7b4debd7c544765db12cf2c74e01fb3.svg",
+    "static/media/dropout_experiment_graph.png": "/ml-toolkit/static/media/dropout_experiment_graph.5b424f6062d698b41139.png",
+    "static/media/AutoencoderDiagram.svg": "/ml-toolkit/static/media/AutoencoderDiagram.049e17b43da745344284ebcb68f7554a.svg",
+    "static/media/SkipConnectionDiagram.svg": "/ml-toolkit/static/media/SkipConnectionDiagram.7299888d1548694f319d99815c6aa962.svg",
+    "static/media/AutoencoderExample.svg": "/ml-toolkit/static/media/AutoencoderExample.836f09866393c63353afe83935323105.svg",
+    "static/media/DropoutDiagram.svg": "/ml-toolkit/static/media/DropoutDiagram.666964365003a03ae9fd70984b6d08ea.svg",
+    "static/media/AlphaBetaPruningTreePruned.svg": "/ml-toolkit/static/media/AlphaBetaPruningTreePruned.9966de7f2abafc7b2a8e847a118cb8cb.svg",
+    "static/media/AlphaBetaPruningTree.svg": "/ml-toolkit/static/media/AlphaBetaPruningTree.6caae05aa57bfb8746ef1e1f65092a2b.svg",
+    "static/media/ArbitraryGameTree.svg": "/ml-toolkit/static/media/ArbitraryGameTree.8090047b5e8288f2b7713b9bcd5c9550.svg",
+    "static/media/logo.png": "/ml-toolkit/static/media/logo.f99262a4c70b713257da.png",
+    "static/media/mnist_color.png": "/ml-toolkit/static/media/mnist_color.7c1d43ec7a32c6c374db.png",
+    "static/media/mnist.png": "/ml-toolkit/static/media/mnist.f6fde1eb85ca62f75431.png",
+    "static/media/TTTGameTree.svg": "/ml-toolkit/static/media/TTTGameTree.29695ec01746f191f0195346f0c2577b.svg",
+    "static/media/DropoutThumbnail.svg": "/ml-toolkit/static/media/DropoutThumbnail.6cd2ea40820cd684c6d95b53d31f5796.svg",
+    "static/media/SkipConnectionThumbnail.svg": "/ml-toolkit/static/media/SkipConnectionThumbnail.8ea02ab66477048279f86fe84c5027eb.svg",
+    "static/media/TTTIntroThumbnail.svg": "/ml-toolkit/static/media/TTTIntroThumbnail.18dae5ba127fd2db4707628c1a00f082.svg",
     "index.html": "/ml-toolkit/index.html",
-    "main.ed9f88c7.css.map": "/ml-toolkit/static/css/main.ed9f88c7.css.map",
-    "main.ecd51375.js.map": "/ml-toolkit/static/js/main.ecd51375.js.map",
+    "static/media/AutoencoderThumbnail.svg": "/ml-toolkit/static/media/AutoencoderThumbnail.0a2dd616909dc012b16910c90572f74d.svg",
+    "main.ecc5667d.css.map": "/ml-toolkit/static/css/main.ecc5667d.css.map",
+    "main.3a55abad.js.map": "/ml-toolkit/static/js/main.3a55abad.js.map",
     "787.a0e8c8df.chunk.js.map": "/ml-toolkit/static/js/787.a0e8c8df.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ed9f88c7.css",
-    "static/js/main.ecd51375.js"
+    "static/css/main.ecc5667d.css",
+    "static/js/main.3a55abad.js"
   ]
 }
