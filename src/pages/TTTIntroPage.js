@@ -4,19 +4,11 @@ import { useRef } from "react";
 import { Anchor, Code } from "@mantine/core";
 import { Prism } from "@mantine/prism";
 
-import Eq from "../components/Eq";
-
 import ArticleNavigation from "../components/ArticleNavigation";
 import ArticleHeader from "../components/ArticleHeader";
 import ArticleTitle from "../components/ArticleTitle";
 import ArticleSubtitle from "../components/ArticleSubtitle";
 import ArticleAuthor from "../components/ArticleAuthor";
-import ArticleImage from "../components/ArticleImage";
-
-import mnist from "../images/mnist.png";
-import mnist_color from "../images/mnist_color.png";
-import dropout_experiment_graph from "../images/dropout_experiment_graph.png";
-import DropoutDiagram from "../images/DropoutDiagram.svg";
 
 const TTTIntroPage = () => {
   const contentRef = useRef(null);
@@ -487,8 +479,26 @@ class BoardDisplay:
 `}
             </Prism>
             <p>
-              Running <Code>main_display.py</Code> should open up a window on
-              which you can now play tic-tac-toe with a friend!
+              In the <Code>BoardDisplay</Code> constructor, the{" "}
+              <Code>is_main_board</Code> parameter is used to specify whether or
+              not the board should respond to click events and display the "win"
+              text. This will be useful later on, when we reuse this class to
+              display our algorithm's recommended continuation; the user
+              shouldn't be able to interact with these board. In anticipation of
+              visualizing the best continuation of a position, we allow a{" "}
+              <Code>BoardDisplay</Code> to be instantiated from an existing
+              board; otherwise, the default is to create a new board from the
+              starting position. Each of the methods <Code>draw_grid()</Code>,{" "}
+              <Code>draw_x()</Code>, <Code>draw_o()</Code>,{" "}
+              <Code>draw_markers()</Code>, and <Code>draw_window()</Code> uses
+              pygame's built-in functions to render elements of the board.
+              Finally, the <Code>draw_board()</Code> function checks for click
+              events to make moves on the board and draws each board element.
+            </p>
+            <p>
+              With all that setup out of the way, running{" "}
+              <Code>main_display.py</Code> should open up a window on which you
+              can now play tic-tac-toe with a friend!
             </p>
             <img
               src="https://media.giphy.com/media/PioAZoey8gWNxE6Ha0/giphy.gif"
@@ -496,8 +506,8 @@ class BoardDisplay:
               width="50%"
             />
             <p>
-              With this, we're ready to move on to the main event: writing AI to
-              achieve perfect play.
+              At last, we're ready to move on to writing AI to achieve perfect
+              play.
             </p>
           </div>
         </div>

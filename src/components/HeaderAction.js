@@ -9,14 +9,11 @@ import {
 } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons";
 import { useNavigate, NavLink } from "react-router-dom";
-import { UnstyledButton, useMantineColorScheme } from "@mantine/core";
+import { UnstyledButton } from "@mantine/core";
 
 import logo from "../images/logo.png";
-import logo_dark from "../images/logo_dark.png";
 
-import ThemeButton from "../components/ThemeButton";
-
-const HEADER_HEIGHT = 70;
+const HEADER_HEIGHT = 80;
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -64,17 +61,8 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-// interface HeaderActionProps {
-//   links: {
-//     link: string,
-//     label: string,
-//     links: { link: string, label: string }[],
-//   }[];
-// }
-
 export default function HeaderAction({ links }) {
   const { classes } = useStyles();
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   const navigate = useNavigate();
   const items = links.map((link) => {
@@ -112,9 +100,11 @@ export default function HeaderAction({ links }) {
       <Container className={classes.inner} fluid>
         <UnstyledButton>
           <Image
-            src={colorScheme === "dark" ? logo_dark : logo}
+            src={logo}
             alt="ML Toolkit Logo"
             width={200}
+            mt={20}
+            ml={5}
             onClick={() => {
               navigate("/");
             }}

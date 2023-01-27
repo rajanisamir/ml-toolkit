@@ -10,6 +10,7 @@ import DropoutThumbnail from "../images/DropoutThumbnail.svg";
 import SkipConnectionThumbnail from "../images/SkipConnectionThumbnail.svg";
 import AutoencoderThumbnail from "../images/AutoencoderThumbnail.svg";
 import TTTIntroThumbnail from "../images/TTTIntroThumbnail.svg";
+import TTTGameTree from "../images/TTTGameTree.svg";
 
 const HomePage = () => {
   const { ref: section1, inView: section1InView } = useInView({
@@ -73,7 +74,7 @@ const HomePage = () => {
     <ArticleCard
       name="Minimax and Alpha-Beta Pruning"
       description="How can we implement an algorithm that achieves perfect play in tic-tac-toe?"
-      img={TTTIntroThumbnail}
+      img={TTTGameTree}
       pagePath="/minimax"
     />
   );
@@ -82,7 +83,7 @@ const HomePage = () => {
     <ArticleCard
       name="Monte Carlo Tree Search"
       description="We discuss and implement MCTS, an algorithm capable of approximating perfect play by continuously improving its predictions."
-      img={TTTIntroThumbnail}
+      //   img={TTTIntroThumbnail}
       pagePath="/mcts"
     />
   );
@@ -139,10 +140,10 @@ const HomePage = () => {
       <br />
       <Text style={{ fontSize: 21 }}>
         Finding high-quality machine learning resources shouldn't be an ordeal.
-        ML Toolkit is an educational resource that eschews both the information
-        density of technical research papers and the inconsistent explanations
-        of many learning resources to provide a no-compromises means of
-        understanding complex but powerful concepts.
+        ML Toolkit is a completely free educational resource that forgoes both
+        the information density of technical research papers and the
+        inconsistent explanations of many learning resources to provide a
+        no-compromises means of understanding complex but powerful concepts.
       </Text>
       <br />
       <br />
@@ -171,13 +172,13 @@ const HomePage = () => {
             span={4}
             className={section1InView ? "fadeFromLeft delay1" : "hidden"}
           >
-            {dropoutCard}
+            {skipConnectionsCard}
           </Grid.Col>
           <Grid.Col
             span={4}
             className={section1InView ? "fadeFromLeft delay1" : "hidden"}
           >
-            {skipConnectionsCard}
+            {dropoutCard}
           </Grid.Col>
           <Grid.Col
             span={4}
@@ -283,12 +284,11 @@ const HomePage = () => {
           The Transformer Architecture
         </Text>
         <Text mb="1rem" className={section3InView ? "fadeFromLeft" : "hidden"}>
-          Already familiar with concepts in deep learning? This series provides
-          an in-depth look into the Transformer, an attention-driven sequence
-          transduction model. One of the most important deep learning
-          architectures right now, the Transformer model has yielded
-          state-of-the-art machine translation performance and drives models
-          like GPT-3.
+          This series provides an in-depth look into the Transformer, an
+          attention-driven sequence transduction model. One of the most
+          important deep learning architectures right now, the Transformer model
+          has yielded state-of-the-art machine translation performance and
+          drives models like GPT-3.
         </Text>
         <br />
         <Grid>

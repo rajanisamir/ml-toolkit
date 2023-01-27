@@ -16,6 +16,7 @@ import DropoutPage from "./pages/DropoutPage";
 import SkipConnectionPage from "./pages/SkipConnectionPage";
 import AutoencoderPage from "./pages/AutoencoderPage";
 import TTTIntroPage from "./pages/TTTIntroPage";
+import MinimaxPage from "./pages/MinimaxPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 
 function App() {
@@ -50,18 +51,7 @@ function App() {
       >
         <Router basename={process.env.PUBLIC_URL}>
           <div>
-            <AppShell
-              padding="md"
-              header={<Navbar />}
-              //   styles={(theme) => ({
-              //     main: {
-              //       backgroundColor:
-              //         theme.colorScheme === "dark"
-              //           ? theme.colors.dark[8]
-              //           : theme.colors.gray[0],
-              //     },
-              //   })}
-            >
+            <AppShell padding="md" header={<Navbar />}>
               <div className="content">
                 <ScrollToTop>
                   <Routes>
@@ -86,6 +76,7 @@ function App() {
                     />
                     <Route path="/autoencoders" element={<AutoencoderPage />} />
                     <Route path="/ttt-intro" element={<TTTIntroPage />} />
+                    <Route path="/minimax" element={<MinimaxPage />} />
                     <Route path="/coming-soon" element={<ComingSoonPage />} />
                   </Routes>
                 </ScrollToTop>

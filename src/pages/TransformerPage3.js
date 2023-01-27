@@ -81,11 +81,11 @@ const TransformerPage3 = () => {
               to be a 50,000-dimensional vector, where each dimension is the
               probability of a particular word.
             </p>
-            <p>
+            {/* <p>
               Now, what happens when we want the model to output a full
               sentence? As before, let's suppose we're using the Transformer for
               a English-to-Spanish language translation task.
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
