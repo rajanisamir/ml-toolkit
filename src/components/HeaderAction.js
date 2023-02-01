@@ -102,8 +102,7 @@ export default function HeaderAction({ links }) {
           <Image
             src={logo}
             alt="ML Toolkit Logo"
-            width={200}
-            mt={20}
+            width={160}
             ml={5}
             onClick={() => {
               navigate("/");

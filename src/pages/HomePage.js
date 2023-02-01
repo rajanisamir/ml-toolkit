@@ -11,6 +11,7 @@ import SkipConnectionThumbnail from "../images/SkipConnectionThumbnail.svg";
 import AutoencoderThumbnail from "../images/AutoencoderThumbnail.svg";
 import TTTIntroThumbnail from "../images/TTTIntroThumbnail.svg";
 import TTTGameTree from "../images/TTTGameTree.svg";
+import MCTSDiagram from "../images/MCTSDiagram.svg";
 
 const HomePage = () => {
   const { ref: section1, inView: section1InView } = useInView({
@@ -83,7 +84,7 @@ const HomePage = () => {
     <ArticleCard
       name="Monte Carlo Tree Search"
       description="We discuss and implement MCTS, an algorithm capable of approximating perfect play by continuously improving its predictions."
-      //   img={TTTIntroThumbnail}
+      img={MCTSDiagram}
       pagePath="/mcts"
     />
   );
@@ -118,7 +119,7 @@ const HomePage = () => {
   );
 
   return (
-    <div style={{ marginLeft: "20%", marginRight: "20%" }}>
+    <div style={{ margin: "auto", maxWidth: "800px" }}>
       <Text
         component="span"
         weight={700}

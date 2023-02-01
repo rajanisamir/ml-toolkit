@@ -17,6 +17,7 @@ import SkipConnectionPage from "./pages/SkipConnectionPage";
 import AutoencoderPage from "./pages/AutoencoderPage";
 import TTTIntroPage from "./pages/TTTIntroPage";
 import MinimaxPage from "./pages/MinimaxPage";
+import MCTSPage from "./pages/MCTSPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
                     <Route path="/ttt-intro" element={<TTTIntroPage />} />
                     <Route path="/minimax" element={<MinimaxPage />} />
                     <Route path="/coming-soon" element={<ComingSoonPage />} />
+                    <Route path="/mcts" element={<MCTSPage />} />
                   </Routes>
                 </ScrollToTop>
               </div>
