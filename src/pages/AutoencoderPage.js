@@ -14,9 +14,8 @@ import ArticleSubtitle from "../components/ArticleSubtitle";
 import ArticleAuthor from "../components/ArticleAuthor";
 import ArticleImage from "../components/ArticleImage";
 
-import mnist from "../images/mnist.png";
-import mnist_color from "../images/mnist_color.png";
-import dropout_experiment_graph from "../images/dropout_experiment_graph.png";
+import autoencoder_loss from "../images/autoencoder_loss.png";
+import autoencoder_anomalies from "../images/autoencoder_anomalies.png";
 import AutoencoderExample from "../images/AutoencoderExample.svg";
 import AutoencoderDiagram from "../images/AutoencoderDiagram.svg";
 
@@ -188,6 +187,250 @@ const AutoencoderPage = () => {
               detect anomalies in a dataset.
             </p>
             <ArticleHeader sectionHeader={sectionHeaders[3]} />
+            <p>
+              To demonstrate how an autoencoder might be used on a practical
+              task, we'll implement an autoencoder that can detect anomalies in
+              the MNIST dataset of handwritten digits. It should be noted that
+              if we were to implement an autoencoder for an anomaly detection
+              task on a real dataset, we'd likely want to devise some way of
+              validating our model after it is trained, such as by ensuring that
+              it flags known anomalous samples. For this simple example,
+              however, we'll just perform a crude qualitative examination of the
+              samples with the <Eq text="$$k$$" /> largest reconstruction
+              errors, which should be enough to convince you that autoencoders
+              can be a viable strategy for solving anomaly detection tasks.
+            </p>
+            <p>
+              The code I wrote for this exercise is built off the MNIST code
+              from the{" "}
+              <Anchor
+                href="https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html"
+                target="_blank"
+              >
+                PyTorch Quickstart Guide
+              </Anchor>
+              . First, if you haven't installed PyTorch on your local machine,
+              run:
+            </p>
+            <Prism language="python">
+              {`pip install torch==1.9.0 torchvision==0.10.0`}
+            </Prism>
+            <p>
+              We'll start off by importing the necessary utilities from PyTorch,
+              as well as matplotlib.pyplot, which will allow us to plot our
+              results.
+            </p>
+            <Prism language="python">
+              {`import torch
+from torch import nn
+from torch.utils.data import DataLoader
+from torchvision import datasets
+from torchvision.transforms import ToTensor
+
+from matplotlib import pyplot as plt
+`}
+            </Prism>
+            <p>
+              Our autoencoder will consist of an encoder that flattens the input
+              image and reduces the dimension from an input dimension of 784 to
+              a bottleneck dimension of 50, using a few hidden layers with ReLU
+              activation. The decoder will use identical hidden layers, with the
+              dimensions reversed, to bring the input back up to a dimension of
+              784, with a sigmoid activation function at the output layer
+              ensuring the pixel values of the output image stay between 0 and
+              1. We'll also unflatten the output of the autoencoder to match the
+              dimensions of the original image.
+            </p>
+            <Prism language="python">
+              {`class Autoencoder(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.flatten = nn.Flatten()
+        self.encoder = nn.Sequential(
+            nn.Linear(28*28, 400),
+            nn.ReLU(),
+            nn.Linear(400, 100),
+            nn.ReLU(),
+            nn.Linear(100, 50),
+            nn.ReLU(),
+        )
+        self.decoder = nn.Sequential(
+            nn.Linear(50, 100),
+            nn.ReLU(),
+            nn.Linear(100, 400),
+            nn.ReLU(),
+            nn.Linear(400, 28*28),
+            nn.Sigmoid()
+        )
+        self.unflatten = nn.Unflatten(1, (1, 28, 28))
+
+    def forward(self, x):
+        x = self.flatten(x)
+        x = self.encoder(x)
+        x = self.decoder(x)
+        x = self.unflatten(x)
+        return x`}
+            </Prism>
+            <p>
+              We define functions <Code>train()</Code> and <Code>test()</Code>{" "}
+              almost exactly as they're defined in the PyTorch Quickstart Guide.
+              However, instead of computing the loss using the model output and
+              the sample's label, we compute the reconstruction error using the
+              model's output and the original sample.
+            </p>
+            <Prism language="python">
+              {`def train(dataloader, model, loss_fn, optimizer):
+    size = len(dataloader.dataset)
+    model.train()
+    for batch, (X, y) in enumerate(dataloader):
+        X, y = X.to(device), y.to(device)
+
+        # Compute prediction error
+        pred = model(X)
+        loss = loss_fn(pred, X)
+
+        # Backpropagation
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        if batch % 100 == 0:
+            loss, current = loss.item(), batch * len(X)
+            print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
+
+
+def test(dataloader, model, loss_fn):
+    num_batches = len(dataloader)
+    model.eval()
+    test_loss = 0
+    with torch.no_grad():
+        for X, y in dataloader:
+            X, y = X.to(device), y.to(device)
+            pred = model(X)
+            test_loss += loss_fn(pred, X).item()
+    test_loss /= num_batches
+    print(f"Avg test loss: {test_loss:>8f} \\n")
+    return test_loss
+`}
+            </Prism>
+            <p>
+              Since we'd like to detect the samples that fall out of
+              distribution, we'll implement a function{" "}
+              <Code>detect_anomalies()</Code> to compute the reconstruction
+              error for each sample in the test dataset and keep track of the
+              original and reconstructed images for the samples with the five
+              largest reconstruction errors.
+            </p>
+            <Prism language="python">
+              {`def detect_anomalies(dataloader, model, loss_fn):
+    model.eval()
+    top_5_anomalies = []
+    with torch.no_grad():
+        for X, y in dataloader:
+            X, y = X.to(device), y.to(device)
+            pred = model(X)
+            for (orig, recon) in zip(X, pred):
+                loss = loss_fn(orig, recon).item()
+                top_5_anomalies.append((orig, recon, loss))
+            top_5_anomalies = sorted(top_5_anomalies, key=(lambda a: a[2]), reverse=True)[:5]
+    return top_5_anomalies`}
+            </Prism>
+            <p>
+              Finally, we'll train our autoencoder, and plot its loss curve, as
+              well as the top five anomalies it finds.
+            </p>
+            <Prism language="python">
+              {`if __name__ == "__main__":
+    # Download training data from open datasets.
+    training_data = datasets.MNIST(
+        root="data",
+        train=True,
+        download=True,
+        transform=ToTensor(),
+    )
+
+    # Download test data from open datasets.
+    test_data = datasets.MNIST(
+        root="data",
+        train=False,
+        download=True,
+        transform=ToTensor(),
+    )
+
+    batch_size = 256
+
+    # Create data loaders.
+    train_dataloader = DataLoader(training_data, batch_size=batch_size)
+    test_dataloader = DataLoader(test_data, batch_size=batch_size)
+
+    for X, y in test_dataloader:
+        print(f"Shape of X [N, C, H, W]: {X.shape}")
+        print(f"Shape of y: {y.shape} {y.dtype}")
+        break
+
+    # Get cpu or gpu device for training.
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"Using {device} device")
+    
+    model = Autoencoder()
+
+    model.to(device)
+    print(model)
+
+    loss_fn = nn.MSELoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+
+    test_losses = []
+
+    epochs = 80
+    for t in range(epochs):
+        print(f"Epoch {t+1}\\n-------------------------------")
+        train(train_dataloader, model, loss_fn, optimizer)
+        loss = test(test_dataloader, model, loss_fn)
+        test_losses.append(loss)
+    print("Done!")
+
+    # Plot loss curve.
+    plt.plot(test_losses)
+    plt.xlabel("Training Epoch")
+    plt.ylabel("Test Loss")
+    plt.title("Autoencoder Test Loss on MNIST Dataset")
+    plt.savefig(f"test_loss_plot")
+    
+    # Get top 5 anomalies and plot.
+    top_5_anomalies = detect_anomalies(test_dataloader, model, loss_fn)
+    fig, axs = plt.subplots(nrows=2, ncols=5)
+    for i, (img, recon, _) in enumerate(top_5_anomalies):
+        axs[0][i].imshow(img[0].cpu())
+        axs[1][i].imshow(recon[0].cpu())
+        axs[0][i].xaxis.set_visible(False)
+        axs[0][i].yaxis.set_visible(False)
+        axs[1][i].xaxis.set_visible(False)
+        axs[1][i].yaxis.set_visible(False)
+    plt.savefig("MNIST Anomalies")`}
+            </Prism>
+            <p>Below is the loss curve from the training run on my machine:</p>
+            <ArticleImage src={autoencoder_loss} width="60%" />
+            <p>
+              I've also included the original and reconstructed images from the
+              samples with the top 5 largest reconstruction errors.{" "}
+            </p>
+            <ArticleImage
+              src={autoencoder_anomalies}
+              width="80%"
+              caption="The original (top) and reconstructed (bottom) images from the samples with the largest reconstruction errors."
+            />
+            <p>
+              A quick qualitative examination suggests these samples could
+              indeed be considered anomalous; two of the samples (the images of
+              the 3 and the 2) have artifacts on the right hand side, two of the
+              samples (the 0 and the 7) have unique strokes or are written in a
+              unique way, and one of the samples (the 8) is cut off. While a
+              real application might warrant a far more rigorous validation of
+              the model, our quick-and-dirty experiments shows that autoencoders
+              are at least a viable strategy for tackling the anomaly detection
+              problem.
+            </p>
           </div>
         </div>
       </div>
