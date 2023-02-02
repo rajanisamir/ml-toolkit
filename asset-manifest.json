@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ml-toolkit/static/css/main.ecc5667d.css",
-    "main.js": "/ml-toolkit/static/js/main.e5ecafb7.js",
+    "main.js": "/ml-toolkit/static/js/main.69b53a44.js",
     "static/js/787.a0e8c8df.chunk.js": "/ml-toolkit/static/js/787.a0e8c8df.chunk.js",
     "static/media/ArbitraryGameTreeAnimation.webp": "/ml-toolkit/static/media/ArbitraryGameTreeAnimation.58dd848b542e4af4e168.webp",
     "static/media/AttentionDiagram.svg": "/ml-toolkit/static/media/AttentionDiagram.c15ba31961a2b80ecc04fab531dbca20.svg",
@@ -20,11 +20,13 @@
     "static/media/AlphaBetaPruningTreePruned.svg": "/ml-toolkit/static/media/AlphaBetaPruningTreePruned.9966de7f2abafc7b2a8e847a118cb8cb.svg",
     "static/media/AlphaBetaPruningTree.svg": "/ml-toolkit/static/media/AlphaBetaPruningTree.6caae05aa57bfb8746ef1e1f65092a2b.svg",
     "static/media/ArbitraryGameTree.svg": "/ml-toolkit/static/media/ArbitraryGameTree.8090047b5e8288f2b7713b9bcd5c9550.svg",
+    "static/media/autoencoder_loss.png": "/ml-toolkit/static/media/autoencoder_loss.2544385fb9248dc1c80e.png",
     "static/media/logo.png": "/ml-toolkit/static/media/logo.f99262a4c70b713257da.png",
     "static/media/MCTSSelectionDiagram1.svg": "/ml-toolkit/static/media/MCTSSelectionDiagram1.cf45c5a3f38a0a11ba149fc39d513a5d.svg",
     "static/media/mnist_color.png": "/ml-toolkit/static/media/mnist_color.7c1d43ec7a32c6c374db.png",
     "static/media/mnist.png": "/ml-toolkit/static/media/mnist.f6fde1eb85ca62f75431.png",
     "static/media/TTTGameTree.svg": "/ml-toolkit/static/media/TTTGameTree.29695ec01746f191f0195346f0c2577b.svg",
+    "static/media/autoencoder_anomalies.png": "/ml-toolkit/static/media/autoencoder_anomalies.de15ffd252fce787601b.png",
     "static/media/MCTSSelectionDiagram2.svg": "/ml-toolkit/static/media/MCTSSelectionDiagram2.8d6f4fa70bea6b1e3a9a36bda3a7cdb3.svg",
     "static/media/DropoutThumbnail.svg": "/ml-toolkit/static/media/DropoutThumbnail.6cd2ea40820cd684c6d95b53d31f5796.svg",
     "static/media/SkipConnectionThumbnail.svg": "/ml-toolkit/static/media/SkipConnectionThumbnail.8ea02ab66477048279f86fe84c5027eb.svg",
@@ -32,11 +34,11 @@
     "index.html": "/ml-toolkit/index.html",
     "static/media/AutoencoderThumbnail.svg": "/ml-toolkit/static/media/AutoencoderThumbnail.0a2dd616909dc012b16910c90572f74d.svg",
     "main.ecc5667d.css.map": "/ml-toolkit/static/css/main.ecc5667d.css.map",
-    "main.e5ecafb7.js.map": "/ml-toolkit/static/js/main.e5ecafb7.js.map",
+    "main.69b53a44.js.map": "/ml-toolkit/static/js/main.69b53a44.js.map",
     "787.a0e8c8df.chunk.js.map": "/ml-toolkit/static/js/787.a0e8c8df.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ecc5667d.css",
-    "static/js/main.e5ecafb7.js"
+    "static/js/main.69b53a44.js"
   ]
 }
