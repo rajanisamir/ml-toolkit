@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 
-import { Anchor, Blockquote } from "@mantine/core";
+// import { Anchor, Blockquote } from "@mantine/core";
 
 import Eq from "../components/Eq";
 import BlockEq from "../components/BlockEq";
@@ -11,7 +11,7 @@ import ArticleHeader from "../components/ArticleHeader";
 import ArticleTitle from "../components/ArticleTitle";
 import ArticleSubtitle from "../components/ArticleSubtitle";
 import ArticleAuthor from "../components/ArticleAuthor";
-import ArticleFeedback from "../components/ArticleFeedback";
+// import ArticleFeedback from "../components/ArticleFeedback";
 import ArticleImage from "../components/ArticleImage";
 
 import QKVDiagram from "../images/QKVDiagram.svg";
@@ -23,10 +23,6 @@ const TransformerPage1 = () => {
   const contentRef = useRef(null);
 
   const sectionHeaders = [
-    {
-      name: "Preface: Feedback",
-      id: "preface",
-    },
     {
       name: "Background & Motivation",
       id: "transformer-background",
@@ -57,7 +53,7 @@ const TransformerPage1 = () => {
             <ArticleTitle name={"The Transformer"} />
             <ArticleSubtitle name={"Part 1: Paying Attention"} />
             <ArticleAuthor />
-            <ArticleHeader sectionHeader={sectionHeaders[0]} />
+            {/* <ArticleHeader sectionHeader={sectionHeaders[0]} />
             <p>
               Because this article will be the first one published on this
               website, I'd like to gather some feedback from the readers. There
@@ -76,9 +72,9 @@ const TransformerPage1 = () => {
               Here, you can let me know what you struggled through, or which
               explanations you found confusing, and I'll do my best to adjust
               the content as needed.
-            </p>
-            <ArticleFeedback />
-            <ArticleHeader sectionHeader={sectionHeaders[1]} />
+            </p> */}
+            {/* <ArticleFeedback /> */}
+            <ArticleHeader sectionHeader={sectionHeaders[0]} />
             <p>
               The Transformer is a neural network architecture that was first
               introduced in 2017 by Vaswani et al. in the paper "Attention is
@@ -150,7 +146,7 @@ const TransformerPage1 = () => {
               fruitfully <em>pay attention</em> to other words during a
               translation task.
             </p>
-            <ArticleHeader sectionHeader={sectionHeaders[2]} />
+            <ArticleHeader sectionHeader={sectionHeaders[1]} />
             <p>
               Before we get into the details of developing a model that
               facilitates such a mechanism of <em>attention</em>, we ought to
@@ -309,7 +305,7 @@ const TransformerPage1 = () => {
               the act of fabrication.
             </p>
             <ArticleImage src={AttentionDiagram} />
-            <ArticleHeader sectionHeader={sectionHeaders[3]} />
+            <ArticleHeader sectionHeader={sectionHeaders[2]} />
             <p>
               Now that we have the basics of the attention mechanism nailed
               down, it's time to develop the mathematical formalism. Here, this

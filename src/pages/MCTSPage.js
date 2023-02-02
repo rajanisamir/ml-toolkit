@@ -41,6 +41,10 @@ const MCTSPage = () => {
       name: "Implementing MCTS",
       id: "implementing-mcts",
     },
+    {
+      name: "Visualization Evaluations",
+      id: "visualizing-evaluations",
+    },
   ];
 
   function getHeaders() {
@@ -302,14 +306,502 @@ const MCTSPage = () => {
               theoretical value used in the paper by Auer et al.
             </p>
             <p>
-              {/* MCTS converges to an optimal solution by improving its predictions
-              over time. As nodes are added to the game tree in the expansion
-              phase, more of the game is played out in the selection phase and
-              less of the game is played out in the simulation phase, where
-              moves are selected uniformly at random. In the selection phase, we
-              can select moves according to a policy, so that optimal lines of
-              play will be explored more often than suboptimal ones. */}
+              While I won't mathematically justify the exact form of exploration
+              term here, it's fairly easy to understand intuitively why the term
+              encourages exploration. When the number of times <Eq text="$n$" />{" "}
+              a node has been visited is small, the exploration term is large.
+              Thus, nodes for which we do not have much information will be
+              visited more frequently. As we become more confident about our
+              estimate for the value of a node, the exploration term shrinks,
+              because exploring that node again doesn't give us as much new
+              information. The exploration term also increases as the number of
+              times <Eq text="$N$" /> a node's parent has been visited grows.
+              This can be thought of as providing a counterbalance to the
+              shrinkage of the exploration term by ensuring that the rate of
+              exploration doesn't grow too small, too quickly. Together, these
+              terms ensure that we explore enough that we learn about lines of
+              play that are difficult to find, but not so much that the
+              evaluations of positions get thrown off.
             </p>
+            <ArticleHeader sectionHeader={sectionHeaders[3]} />
+            <p>
+              Now that we've covered how MCTS works, let's revisit our issues
+              with the depth-limited minimax algorithm to understand why MCTS
+              might be a better choice.
+              <ul>
+                <li>
+                  <strong>Requires Static Evaluation: </strong> While the
+                  depth-limited minimax algorithm required devising a heuristic
+                  to produce a static evaluation of positions, MCTS simulates
+                  games to completion and thus does not require a static
+                  evaluation.
+                </li>
+                <li>
+                  <strong>Wasted Computation Time: </strong>The depth-limited
+                  minimax algorithm wastes computation time, because it must at
+                  multiple depths, only one of which will be used to produce the
+                  final move. By contrast, MCTS continuously improves its
+                  predictions as time goes on.
+                </li>
+                <li>
+                  <strong>Uniformly Limited Depth: </strong>The depth-limited
+                  minimax algorithm limits the exploration of all lines of play
+                  to a specified depth, which could cause issues if a large
+                  depth is necessary to fully comprehend a complex line of play.
+                  Instead, the depth to which MCTS explores in the selection
+                  phase is not explicitly bounded. As nodes are added to the
+                  game tree in the expansion phase, more of the game is played
+                  out in the selection phase and less of the game is played out
+                  in the simulation phase, where moves are selected at random.
+                  In the selection phase, we can select moves according to a
+                  policy, so that optimal lines of play will be explored more
+                  often than suboptimal ones. This leads to more expansion
+                  steps, and thus a larger effective search depth, in the most
+                  promising lines.
+                </li>
+              </ul>
+            </p>
+            <ArticleHeader sectionHeader={sectionHeaders[4]} />
+            <p>
+              Now that we understand why MCTS can alleviate many of the issues
+              with the minimax algorithm, let's implement it on our tic-tac-toe
+              game in Python to see how it works in practice. Create a new file
+              called <Code>mcts.py</Code> with the following imports:
+            </p>
+            <Prism language="python">
+              {`import numpy as np
+import math
+import copy
+import time
+from board import Board`}
+            </Prism>
+            <p>
+              At the top of the file, we'll also define a constant{" "}
+              <Code>c</Code> for the UCT exploration coefficient.
+            </p>
+            <Prism language="python">{`c = math.sqrt(2)`}</Prism>
+            <p>
+              We will define a class <Code>MCTSNode</Code>, corresponding with
+              one node in the game tree. This class will support methods for the
+              selection, expansion, simulation, and backpropagation phases of
+              MCTS, each of which will be initiated from the node on which they
+              are called. First, let's define the constructor for the{" "}
+              <Code>MCTSNode</Code> class.
+            </p>
+            <Prism language="python">
+              {`class MCTSNode:
+    def __init__(self, board, parent=None):
+        self.board = board
+        self.parent = parent  
+
+        self.children = []
+        self.remaining_moves = self.board.get_legal_moves()
+        self.score = 0
+        self.visits = 0`}
+            </Prism>
+            <p>
+              The constructor accepts a parameter <Code>board</Code> that
+              represents the state of the board at the node, as well as a
+              parameter <Code>parent</Code> corresponding with the node's parent
+              in the game tree. The node will also maintain a list of its
+              children, a list of the remaining moves available from the node
+              which do not yet have corresponding nodes in the game tree, its
+              score, and the number of times it has been visited.
+            </p>
+            <p>
+              Next, we'll implement the selection phase, which will require
+              adding three additional methods to the <Code>MCTSNode</Code>{" "}
+              class. To select a leaf node, we'll start at the root, and
+              continue selecting children (via their UCT scores) until either
+              the game is over or the current node is not fully expanded (i.e.
+              there is at least one legal move without a corresponding node in
+              the tree). We'll implement methods{" "}
+              <Code>is_fully_expanded()</Code> and <Code>get_game_over()</Code>{" "}
+              to check whether or not we should continue selecting children, and
+              a method <Code>get_uct()</Code> to determine which child we should
+              select. To compute the UCT score in <Code>get_uct()</Code>, we'll
+              need to be able to get the number of visits of a node's parent, so
+              we'll also implement a getter method to return{" "}
+              <Code>self.visits</Code>.
+            </p>
+            <Prism language="python">
+              {`def select(self):
+    curr_node = self
+    while curr_node.is_fully_expanded() and not curr_node.get_game_over():     
+        ucts = [child.get_uct() for child in curr_node.children]
+        curr_node = curr_node.children[np.argmax(ucts)]
+    return curr_node
+    
+
+def is_fully_expanded(self):
+    return len(self.remaining_moves) == 0
+
+
+def get_game_over(self):
+    return self.board.get_game_over()
+
+    
+def get_uct(self):
+    return self.score / self.visits + c * math.sqrt(math.log(self.parent.get_visits()) / self.visits)
+
+
+def get_visits(self):
+    return self.visits
+    `}
+            </Prism>
+            <p>
+              To implement the expansion method, we'll first check if game has
+              ended at the current node; if so, no new node can be created, and
+              we'll just return the current node. Otherwise, we'll pop one legal
+              move from the list of remaining unexplored moves, make this move
+              on the board, and create a child node corresponding with the new
+              board state after making the move.
+            </p>
+            <Prism language="python">
+              {`def expand(self):
+    if self.board.get_game_over():
+        return self
+    move = self.remaining_moves.pop()
+    board = copy.deepcopy(self.board)
+    board.make_move(move)
+    child = MCTSNode(board, self)
+    self.children.append(child)
+    return child
+    `}
+            </Prism>
+            <p>
+              For the simulation phase, we'll continue making moves, chosen
+              uniformly at random, from the current board state, until the game
+              has ended. Finally, we'll return the winner of the game.
+            </p>
+            <Prism language="python">
+              {`def simulate(self):
+    board = copy.deepcopy(self.board)
+    while not board.get_game_over():
+        legal_moves = board.get_legal_moves()
+        move = legal_moves[np.random.choice(len(legal_moves))]
+        board.make_move(move)
+    winner = board.get_winner()
+    return winner`}
+            </Prism>
+            <p>
+              Finally, the backpropagation phase is implemented by a method that
+              accepts a parameter that specifies the winner of the simulation.
+              The method will walk up the tree, updating the score and number of
+              visits for each node, depending on the winner of the game. If the
+              winner is the opposite of the player whose turn it is at a given
+              node, it means the player who made the last move won the game, and
+              we should increase the score of that node by 1. If the game is a
+              draw, we'll increase the score of the node by 0.5. We'll update
+              the score and number of visits for a node in a method{" "}
+              <Code>update_value()</Code>, and we'll implement a method{" "}
+              <Code>get_parent()</Code> that allows us to traverse up the tree.
+            </p>
+            <Prism language="python">
+              {`def backpropagate(self, winner):
+    curr_node = self
+    while curr_node:
+        curr_node.update_value(winner)
+        curr_node = curr_node.get_parent() 
+          
+        
+def update_value(self, winner):
+    if (self.board.player == 1 and winner == 2) or (self.board.player == -1 and winner == 1):
+        self.score += 1
+    elif winner == 0:
+        self.score += 0.5
+    self.visits += 1
+
+def get_parent(self):
+    return self.parent
+    `}
+            </Prism>
+            <p>
+              Finally, we'll write a method to be invoked on the root of the
+              game tree, which will perform each of the four steps of MCTS for a
+              specified number of seconds, and then return the best move from
+              the root. Instead of only returning the best move, we'll return a
+              dictionary of each legal move from the root, along with its
+              evaluation, which will allow us to visualize the recommendations
+              of MCTS on the game board. To do this, we'll implement a couple of
+              other methods: <Code>get_value()</Code>, which will return a
+              node's win radio, and <Code>get_last_move()</Code>, to get the
+              last move that was made to arrive at a node.
+            </p>
+            <Prism language="python">
+              {`def get_move_evaluations(self, time_allocation):
+    end_time = time.time() + time_allocation
+    while time.time() < end_time:
+        leaf = self.select()
+        child = leaf.expand()
+        winner = child.simulate()
+        child.backpropagate(winner)
+    evaluations = {child.get_last_move(): child.get_value() for child in self.children}
+    return evaluations
+    
+
+def get_value(self):
+    return self.score / self.visits
+
+
+def get_last_move(self):
+    return self.board.get_move_history()[-1]   
+    `}
+            </Prism>
+            <p>
+              That's it! To make sure everything is working, we can invoke MCTS
+              on the starting position of a 3x3 board for something like 15
+              seconds.
+            </p>
+            <Prism language="python">
+              {`if __name__ == "__main__":
+    board = Board(3)
+
+    root = MCTSNode(board)
+    evaluations = root.get_move_evaluations(time_allocation=15)
+    print(evaluations)`}
+            </Prism>
+            <p>
+              If all went well, the output should be a dictionary containing the
+              win ratios of each move, which will likely be somewhere around
+              0.5.
+            </p>
+            <ArticleHeader sectionHeader={sectionHeaders[5]} />
+            <p>
+              Finally, we'll write some code to visualize the evaluations of
+              each move. Rather than showing the evaluation of the position, as
+              we did for the minimax algorithm, we'll display the win ratio of
+              each move in the Monte Carlo rollouts directly on the board. We'll
+              work with the code we ended with last time, beginning with{" "}
+              <Code>main_display.py</Code>. We'll go ahead and remove the{" "}
+              <Code>EvaluationDisplay</Code> import and modify the constructor
+              to set up a square window, with just the board in the center.
+            </p>
+            <Prism language="python">
+              {`def __init__(self, board_dim, window_width):
+    pygame.init()
+
+    # Set up main window
+    self.window_width = window_width
+
+    self.bg_color = (15, 15, 15)
+
+    self.screen = pygame.display.set_mode((self.window_width, self.window_width))
+    self.screen.fill(self.bg_color)
+
+    pygame.display.set_caption('Tic-Tac-Toe')
+
+    # Set up main board display
+    self.main_board_size = 5 * self.window_width // 6
+    self.main_board_pos = (self.window_width // 12, self.window_width // 12)
+    self.main_board_surface = pygame.Surface((self.main_board_size, self.main_board_size))
+    self.main_board_display = BoardDisplay(self.main_board_surface, board_dim, self.main_board_size, True)
+            `}
+            </Prism>
+            <p>
+              In the <Code>run_game()</Code> function, we'll remove the code
+              that retrieves and draws the latest evaluation; this will be done
+              directly in the <Code>BoardDisplay.draw_board()</Code> function.
+              Also, before the call to <Code>pygame.quit()</Code>, we'll invoke
+              on the board display a method called{" "}
+              <Code>stop_evaluation()</Code>, which we'll implement soon, to
+              tell our MCTS thread to stop running. The <Code>run_game()</Code>{" "}
+              function should now look something like this:
+            </p>
+            <Prism language="python">
+              {`def run_game(self):
+    run = True
+    while run:
+        # Check for click
+        clicked = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            if event.type == pygame.MOUSEBUTTONUP:
+                clicked = True        
+
+        # Get mouse position
+        pos = pygame.mouse.get_pos()
+        pos = (pos[0] - self.main_board_pos[0], pos[1] - self.main_board_pos[1])
+        
+        # Draw main board
+        self.main_board_display.draw_board(clicked, pos)
+        self.screen.blit(self.main_board_surface, self.main_board_pos)
+
+        pygame.display.update()
+    
+    self.main_board_display.stop_evaluation()
+    pygame.quit()`}
+            </Prism>
+            <p>
+              Finally, we'll need to modify the <Code>BoardDisplay</Code> class
+              to accomodate our new evaluation. At the top of the file, we can
+              remove the import statement for the <Code>math</Code> module,
+              which we'll no longer need, and we can import the{" "}
+              <Code>MCTSNode</Code> class instead of the{" "}
+              <Code>pruned_minimax()</Code> function:
+            </p>
+            <Prism language="python">
+              {`import pygame
+from pygame.locals import *
+import copy
+from threading import Thread
+
+from board import Board
+from mcts import MCTSNode`}
+            </Prism>
+            <p>
+              To display the evaluations on the game board, we'll display a
+              green square on each space corresponding with a legal move, along
+              with text for the win ratio for that move. We'll use darker
+              squares to denote weaker moves and lighter squares to denote
+              stronger moves. Therefore, it makes sense to use the HSV
+              (hue/saturation/value) color system instead of RGB, because we can
+              vary the "value" to adjust the darkness of the square. To this
+              end, in the constructor for the <Code>BoardDisplay</Code>, we'll
+              initialize instance variables <Code>eval_hue</Code> and{" "}
+              <Code>eval_saturation</Code> for the hue and saturation of the
+              squares. In the constructor, we'll also initialize an instance
+              variable <Code>self.run</Code> to <Code>True</Code>, which will
+              keep track of whether the game is still running. This will allow
+              the evaluation thread to know when to stop running Monte Carlo
+              rollouts.
+            </p>
+            <Prism language="python">
+              {`def __init__(self, surface, board_dim, board_size, is_main_board, board=None):
+    self.surface = surface
+    self.board_dim = board_dim
+    self.board_size = board_size
+    self.is_main_board = is_main_board
+
+    if board:
+        self.board = board
+    else:  
+        self.board = Board(self.board_dim)
+
+    self.font = pygame.font.SysFont(None, self.board_size // 15)
+
+    self.bg_color = (30, 30, 30)
+    self.msg_color = (0, 0, 0)
+    self.msg_bg_color = (255, 255, 255)
+    self.grid_color = (200, 200, 200)
+    self.text_color = (255, 255, 255)
+    self.x_color = (94, 96, 206)
+    self.o_color = (72, 191, 227)
+    self.eval_hue = 127
+    self.eval_saturation = 88
+
+    self.line_width = self.board_size // 30
+    self.grid_spacing = self.board_size // board_dim
+    self.win_rect = Rect(self.board_size // 4, self.board_size // 4, self.board_size // 2, self.board_size // 8)
+    self.again_rect = Rect(self.board_size // 3, self.board_size // 2, self.board_size // 3, self.board_size // 8)
+    
+    if self.is_main_board:
+        self.run = True
+        self.update_evaluation()`}
+            </Prism>
+            <p>
+              In <Code>update_evaluation()</Code>, we'll set{" "}
+              <Code>self.evaluations</Code> to an empty dictionary, and we'll
+              initialize the root node of the game tree with a copy of the
+              current game board. Then, as before, we'll start a thread to
+              execute the <Code>run_evaluation()</Code> method, which will
+              accept a parameter for the root of the game tree.
+            </p>
+            <Prism language="python">
+              {`def update_evaluation(self):
+    self.evaluations = {}
+    self.eval_root = MCTSNode(copy.deepcopy(self.board))
+    t = Thread(target=self.run_evaluation, args=(self.eval_root,))
+    t.start()`}
+            </Prism>
+            <p>
+              In the <Code>run_evaluation</Code> method, we'll continue running
+              MCTS rollouts in 0.1-second bursts. Before updating{" "}
+              <Code>self.evaluations</Code> with the latest estimates, we'll
+              make sure the root of the game tree hasn't changed (i.e. a new
+              move has been made) and <Code>self.run</Code> is set to{" "}
+              <Code>True</Code> (i.e. the game hasn't been quit). If a new move
+              has been made or the game has been quit, we'll break from the
+              evaluation.
+            </p>
+            <p>
+              We'll also implement the <Code>stop_evaluation()</Code> function,
+              which is called before quitting the game, to set{" "}
+              <Code>self.run</Code> to <Code>False</Code>, and we'll modify the{" "}
+              <Code>get_evaluation()</Code> function to return just the{" "}
+              <Code>evaluation</Code> dictionary:
+            </p>
+            <Prism language="python">
+              {`def stop_evaluation(self):
+    self.run = False
+    
+
+def get_evaluation(self):
+    return self.evaluations`}
+            </Prism>
+            <p>
+              Finally, we'll implement the <Code>draw_evaluations()</Code>{" "}
+              function to render the evaluation squares onto the board, using
+              each move's evaluation as the corresponding square's brightness,
+              and we'll call this function in <Code>draw_board()</Code>.
+            </p>
+            <Prism language="python">
+              {`def draw_evaluations(self):
+    padding = self.grid_spacing / 8
+    for move, evaluation in self.evaluations.items():
+        cell_row, cell_col = move
+        rect_left = cell_col * self.grid_spacing + padding + self.line_width / 2
+        rect_top = cell_row * self.grid_spacing + padding + self.line_width / 2
+        rect_width = self.grid_spacing - self.line_width - padding * 2 
+        rect_height = self.grid_spacing - self.line_width - padding * 2 
+        eval_rect = Rect(rect_left, rect_top, rect_width, rect_height)
+
+        color = pygame.Color(0)
+        color.hsva = (self.eval_hue, self.eval_saturation, evaluation * 100, 1)
+
+        pygame.draw.rect(self.surface, color, eval_rect)
+
+        eval_text = f"{evaluation:.2f}"
+        eval_img = self.font.render(eval_text, True, self.text_color)
+        rect = eval_img.get_rect()
+        rect.center = eval_rect.center
+
+        self.surface.blit(eval_img, rect)
+        
+        
+def draw_board(self, clicked=False, pos=None):
+    if self.is_main_board and clicked:
+        if self.board.get_game_over():
+            if self.again_rect.collidepoint(pos):
+                self.board.reset_game()
+                self.update_evaluation()
+        else:
+            cell_col = pos[0] // self.grid_spacing
+            cell_row = pos[1] // self.grid_spacing
+            if self.board.move_is_legal((cell_row, cell_col)):
+                self.board.make_move((cell_row, cell_col))
+                self.update_evaluation()
+
+    self.surface.fill(self.bg_color)
+    self.draw_grid()
+    self.draw_markers()
+    if self.is_main_board:
+        self.draw_winner()
+        self.draw_evaluations()
+        `}
+            </Prism>
+            <p>
+              If all has gone well, running <Code>main_display.py</Code> on the
+              board should allow you to visualize the estimations of MCTS. Below
+              is an example of the visualization running on my machine, on a 4x4
+              board.
+            </p>
+            <img
+              src="https://media.giphy.com/media/9pFKwEYvrRjpXoNgcB/giphy.gif"
+              alt="GIF of Playing Tic-Tac-Toe on a Board, with MCTS Evaluations on Each Square"
+              width="50%"
+            />
           </div>
         </div>
       </div>

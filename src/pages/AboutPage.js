@@ -2,8 +2,8 @@ const AboutPage = () => {
   return (
     <div
       style={{
-        marginLeft: window.innerWidth / 4,
-        marginRight: window.innerWidth / 4,
+        margin: "auto",
+        maxWidth: "800px",
       }}
     >
       <h1>About This Project</h1>
@@ -51,23 +51,19 @@ const AboutPage = () => {
       <p>
         My other justification for creating this set of tutorials is because of
         a dearth of high-quality educational materials on these more recent
-        machine learning developments. To gain even a modest amount of intuition
-        for a concept, I would often have to jump between reading a paper (where
-        the language used might assume familiarity with some more abstruse
+        machine learning developments. To gain a modest amount of intuition for
+        a concept, I would often have to jump between reading a paper (where the
+        language used might assume familiarity with some more abstruse
         concepts), patching together bits and pieces from different blog posts,
         and scrubbing through video explanations. While struggling through
         understanding material can be a valuable educational tool, struggling to
         find quality source material is usually a waste of time.
       </p>
       <p>
-        Currently, I'm working on the first post in the series, which discusses
-        in detail the Transformer architecture, as presented in{" "}
-        <i>Attention is All You Need</i>, which should be finished in the coming
-        weeks. Future plans include presenting code examples in PyTorch along
-        with each architecture, which should help solidify understanding of the
-        theoretical concepts presented. Articles on convolutional neural
-        networks, backpropagation, and other fundamental machine learning
-        concepts are forthcoming.
+        So far, I've written several articles on topics like the Transformer
+        architecture, dropout regularization, and Monte Carlo tree search.
+        Future plans include articles on machine learning fundamentals, a series
+        on convolutional neural networks, and more!
       </p>
     </div>
   );
